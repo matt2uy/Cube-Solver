@@ -7,12 +7,7 @@
 //Cube Solver: solves rubiks cube with 2 servos
 // pictures: <URL>
 // files and instructables: <URL>
-/* order of operations:
-	look (insert colors in 6*6 array)
-	do thing (make cross)
-	look (insert colors again)
-	do thing (fix yellow corners)
-*/
+
 #include <Servo.h>
 //#include <Solver.h>
 
@@ -33,27 +28,27 @@ bool sim_only = false;
 // test function:
 bool test_ongoing = true;
 
-char yellow_side[9] = {'y', 'y', 'y',
+char yellow_side = {'y', 'y', 'y',
                        'y', 'y', 'y',
                        'y', 'y', 'y'};
 
-char white_side[9] =  {'w', 'w', 'w',
+char white_side =  {'w', 'w', 'w',
                        'w', 'w', 'w',
                        'w', 'w', 'w'};
 
-char blue_side[9] =   {'b', 'b', 'b',
+char blue_side =   {'b', 'b', 'b',
                        'b', 'b', 'b',
                        'b', 'b', 'b'};
 
-char red_side[9] =    {'r', 'r', 'r',
+char red_side =    {'r', 'r', 'r',
                        'r', 'r', 'r',
                        'r', 'r', 'r'};
 
-char green_side[9] =  {'g', 'g', 'g',
+char green_side =  {'g', 'g', 'g',
                        'g', 'g', 'g',
                        'g', 'g', 'g'};
 
-char orange_side[9] = {'o', 'o', 'o',
+char orange_side = {'o', 'o', 'o',
                        'o', 'o', 'o',
                        'o', 'o', 'o'};
 
@@ -91,6 +86,26 @@ void print_whole_cube()
 	print_cube(red_side);
 	print_cube(green_side);
 	print_cube(orange_side);
+}
+
+
+// imports cube colors from .py file through serial
+void import_cube_colors()
+{
+	// get all of the cube colors from serial input
+		// format: y, y, y OR y b g
+
+	// make another loop for each face
+	for(int piece = 0; piece < 9; piece++)	// go through each piece
+	{
+		yellow_side[piece] = Serial.read();
+	}
+
+	// parse plain text sequence of colors
+	 // search string cantenation like in hk_translate
+
+	// print finished product
+	print_whole_cube();
 }
 ///////////////////// Physical Movement Functions ///////////////////////////
 
@@ -840,7 +855,7 @@ void front()
 	push_cube();
 	rotate_one();
 	push_cube();
-	rotate_two()
+	rotate_two();
 	}
 
 	// Cube simulation
@@ -1503,21 +1518,12 @@ void fix_cross_instance_1() // bad pieces up and right
 	release_cube();
 
 	// R
-	rotate_two():
+	rotate_two();
 	hold_cube();
 	rotate_one();
 	release_cube();
 
 	// B
-	rotate_two():
-	push_cube();
-	push_cube();
-	push_cube();
-	hold_cube();
-	rotate_one();
-	release_cube();
-
-	// U
 	rotate_two();
 	push_cube();
 	push_cube();
@@ -1528,14 +1534,23 @@ void fix_cross_instance_1() // bad pieces up and right
 
 	// U
 	rotate_two();
+	push_cube();
+	push_cube();
+	push_cube();
 	hold_cube();
 	rotate_one();
 	release_cube();
-	ornage on top
-	green in front
+
+	// U
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//ornage on top
+	//green in front
 
 	// B'
-	white
+	//white
 	rotate_two();
 	push_cube();
 	push_cube();
@@ -1545,8 +1560,8 @@ void fix_cross_instance_1() // bad pieces up and right
 	release_cube();
 
 	// R
-	green
-	rotate_two():
+	//green
+	rotate_two();
 	push_cube();
 	push_cube();
 	push_cube();
@@ -3209,6 +3224,7 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
+	/*
 	//cube_legality_check();
 	//print_cube(white_side);
 	auto_test();
@@ -3220,4 +3236,6 @@ void loop()
 
 	//do_cross();
 	//right();
+	*/
+	import_cube_colors();
 };
