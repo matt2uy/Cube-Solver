@@ -14,48 +14,58 @@ char red_face[9];
 char green_face[9];
 char orange_face[9];
 
-void receive_face(char cube_face[])
+String raw_cube_string = "y, b, w, r, r, g";
+
+void receive_raw_cube()
 {
 	char ready_signal = 'ready';
-	char received_signal = 'recieved';
 	
-	for (int piece_num = 0; piece_num < 9; piece_num++)
-	{	
-		// send ready signal
-		Serial.println(ready_signal);
-		delay(10);
+	// send ready signal
+	Serial.println(ready_signal);
+	delay(10);
 			
-		// receive color
-		cube_face[piece_num] = Serial.read();
-		delay(10);
+	// receive color
+	raw_cube_string = Serial.read();
+	delay(10);
+}
 
-		// send color confirmed signal
-		Serial.println(received_signal);
-		delay(10);
+String get_value(String data, char separator, int index)
+{
+  int found = 0;
+  int strIndex[] = {0, -1};
+  int maxIndex = data.length()-1;
+
+  for(int i=0; i<=maxIndex && found<=index; i++)
+  {
+    if(data.charAt(i)==separator || i==maxIndex)
+    {
+        found++;
+        strIndex[0] = strIndex[1]+1;
+        strIndex[1] = (i == maxIndex) ? i+1 : i;
+    }
+  }
+  
+  return found>index ? data.substring(strIndex[0], strIndex[1]) : "";
+}
+
+void parse_raw_cube()
+{
+	for(int x = 0; x < 9; x++)
+	{
+		yellow_face[x] = get_value(raw_cube_string, ', ', x);
+		Serial.println(x);
 	}
 }
 
-void receive_whole_cube()
-{
-	receive_face(yellow_face);
-	receive_face(white_face);
-	receive_face(blue_face);
-	receive_face(red_face);
-	receive_face(green_face);
-	receive_face(orange_face);
-}
 
 void loop()
 {
-	for(int i = 0; i < 1; i++)
-	{
-		receive_whole_cube();
-	}
-	
-	Serial.println("Done!");
+	receive_raw_cube();
+	parse_raw_cube();
 		
 	while(true)
 	{
 		// do nothing
+		Serial.println("Done!");
 	}
 }

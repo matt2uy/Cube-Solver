@@ -16,7 +16,7 @@ while all_cubes assigned == False:
 
 import serial
 import time
-ser = serial.Serial('/dev/ttyACM0', 9600)
+ser = serial.Serial('/dev/ttyACM1', 9600)
 
 # reset arduino
 ser.setDTR(False) # Drop DTR
@@ -48,56 +48,38 @@ orange_face = ['a', 'b', 'c',
 		 	   'a', 'o', 'f',
 			   'g', 'h', 'i']
 
+raw_cube_string = 'need a function to generate a cube string'
 
+############################ 
+#def generate_raw_cube():
+	# raw_cube_string =
+	# catenate 'raw_cube_string' with yellow_face[0], [1], on and on.....
 
-num_of_cubes = len(yellow_face)
+# send all colors to arduino in one string
+def send_raw_cube():
 
-
-# send all colors to arduino for one face
-def send_face(face):
-	
-	print "Face: ", face[4]
 	ready_signal = ser.readline()	# original signal message
 
-	for cube_num in range(num_of_cubes):
+	# wait until arduino is ready
+	ardu_ready = False	
 		
-		# wait until arduino is ready
-		ardu_ready = False	
-		
-		while ardu_ready == False:
-			arduino_status = ser.readline()
-			time.sleep(0.01)
-			if arduino_status == ready_signal:	# if arduino is ready
-				ardu_ready = True
-				time.sleep(0.01)
-
-		# send the color
-		ser.write(face[cube_num])
-		print "color sent: ", face[cube_num]
+	while ardu_ready == False:
+		arduino_status = ser.readline()
 		time.sleep(0.01)
-
-		# wait until arduino confirms
-		ardu_received == False
-		received_signal = ser.readline()
-
-		while ardu_received == False:
-			arduino_status = ser.readline()
+		if arduino_status == ready_signal:	# if arduino is ready
+			ardu_ready = True
 			time.sleep(0.01)
-			if arduino_status == received_signal:	# if arduino is ready
-				ardu_ready = True
-				time.sleep(0.01)
+
+	# send the color
+	ser.write(raw_cube_string)
+	print "color sent: ", raw_cube_string
+	time.sleep(0.01)
 
 
+############################generate_raw_cube()
+send_raw_cube()	
 
-def send_whole_cube():
-	send_face(yellow_face)
-	send_face(white_face)
-	send_face(blue_face)
-	send_face(red_face)
-	send_face(green_face)
-	send_face(orange_face)
-
-send_whole_cube()	
-
+time.sleep(0.1)
 while True:
 	print ser.readline()
+	time.sleep(0.01)
