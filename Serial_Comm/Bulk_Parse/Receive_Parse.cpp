@@ -35,6 +35,16 @@ void receive_raw_cube()
 
 void accept_string()
 {
+	char ready_signal = 'ready';
+	char received_signal = 'recieved';
+	
+	for (int piece_num = 0; piece_num < 9; piece_num++)
+	{	
+		// send ready signal
+		Serial.println(ready_signal);
+		delay(10);
+	}
+	// receive string
 	while(raw_cube_string == "")
 	{
 		char character;
@@ -43,14 +53,19 @@ void accept_string()
 		    character = Serial.read();
 		   	raw_cube_string.concat(character);
 		}
-		delay(100);
 	}
+	delay(10);
 	Serial.print("String Accepted: ");
-	Serial.print(raw_cube_string);
+	//Serial.print(raw_cube_string);
+
+	// send color confirmed signal
+	Serial.println(received_signal);
+	delay(10);
 }
 
 void parse_raw_cube() // need an input of 54 char length string
-{	// convert to char array
+{	
+	// convert to char array
 	Serial.print("Parsing... ");
 	raw_cube_string.toCharArray(yellow_face, sizeof(yellow_face));
 	Serial.println("yellow...");

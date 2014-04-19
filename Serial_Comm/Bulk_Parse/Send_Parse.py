@@ -16,7 +16,7 @@ while all_cubes assigned == False:
 
 import serial
 import time
-ser = serial.Serial('/dev/ttyACM0', 9600)
+ser = serial.Serial('/dev/ttyACM5', 9600)
 
 # reset arduino
 ser.setDTR(False) # Drop DTR
@@ -48,7 +48,7 @@ orange_face = ['a', 'b', 'c',
 		 	   'a', 'o', 'f',
 			   'g', 'h', 'i']
 
-raw_cube_string = 'a, b, c, d, e, f, g'
+raw_cube_string = 'abcdefghi'
 
 ############################ 
 #def generate_raw_cube():
@@ -58,25 +58,26 @@ raw_cube_string = 'a, b, c, d, e, f, g'
 # send all colors to arduino in one string
 def send_raw_cube():
 	ready_signal = ser.readline()	# original signal message
-	print ready_signal
 
 	# wait until arduino is ready
 	ardu_ready = False	
+		
 	while ardu_ready == False:
 		arduino_status = ser.readline()
+		time.sleep(0.01)
 		if arduino_status == ready_signal:	# if arduino is ready
-			ser.write(ready_signal)
 			ardu_ready = True
-
+			time.sleep(0.01)
 
 	# send the raw_cube_string<
 	ser.write(raw_cube_string)
 	print "color sent: ", raw_cube_string
 
+	time.sleep(0.01)
+
 
 ##generate_raw_cube()
 send_raw_cube()	
-
 while True:
 	time.sleep(0.01)
 	print ser.readline()
