@@ -16,7 +16,7 @@ while all_cubes assigned == False:
 
 import serial
 import time
-ser = serial.Serial('/dev/ttyACM6', 9600)
+ser = serial.Serial('/dev/ttyACM1', 9600)
 
 # reset arduino
 ser.setDTR(False) # Drop DTR
@@ -48,12 +48,33 @@ orange_face = ['a', 'b', 'c',
 		 	   'a', 'o', 'f',
 			   'g', 'h', 'i']
 
-raw_cube_string = "qwertyuioasdfghjklzxcvbnmzxpoiuytrewvfvfvfvfvhjkhjkhjk"
+new_cube_string = ""
 
-############################ 
-#def generate_raw_cube():
-	# raw_cube_string =
-	# catenate 'raw_cube_string' with yellow_face[0], [1], on and on.....
+def generate_raw_cube():
+	raw_cube_string = ""
+	for color in yellow_face:
+		raw_cube_string = raw_cube_string + color
+		#catenate 'raw_cube_string' with yellow_face[0], [1], on and on.....
+
+	for color in white_face:
+		raw_cube_string = raw_cube_string + color
+		#catenate 'raw_cube_string' with yellow_face[0], [1], on and on.....
+	
+	for color in red_face:
+		raw_cube_string = raw_cube_string + color
+		#catenate 'raw_cube_string' with yellow_face[0], [1], on and on.....
+	
+	for color in blue_face:
+		raw_cube_string = raw_cube_string + color
+		#catenate 'raw_cube_string' with yellow_face[0], [1], on and on.....
+
+	for color in green_face:
+		raw_cube_string = raw_cube_string + color
+		#catenate 'raw_cube_string' with yellow_face[0], [1], on and on.....
+
+	for color in orange_face:
+		raw_cube_string = raw_cube_string + color
+		#catenate 'raw_cube_string' with yellow_face[0], [1], on and on.....
 
 # send all colors to arduino in one string
 def send_raw_cube():
@@ -75,8 +96,7 @@ def send_raw_cube():
 
 	time.sleep(0.01)
 
-
-##generate_raw_cube()
+raw_cube_string = generate_raw_cube()
 send_raw_cube()	
 while True:
 	time.sleep(0.01)
