@@ -28,30 +28,31 @@ bool sim_only = false;
 // test function:
 bool test_ongoing = true;
 
-char yellow_side = {'y', 'y', 'y',
+char yellow_side[9] = {'y', 'y', 'y',
                        'y', 'y', 'y',
                        'y', 'y', 'y'};
 
-char white_side =  {'w', 'w', 'w',
+char white_side[9] =  {'w', 'w', 'w',
                        'w', 'w', 'w',
                        'w', 'w', 'w'};
 
-char blue_side =   {'b', 'b', 'b',
+char blue_side[9] =   {'b', 'b', 'b',
                        'b', 'b', 'b',
                        'b', 'b', 'b'};
 
-char red_side =    {'r', 'r', 'r',
+char red_side[9] =    {'r', 'r', 'r',
                        'r', 'r', 'r',
                        'r', 'r', 'r'};
 
-char green_side =  {'g', 'g', 'g',
+char green_side[9] =  {'g', 'g', 'g',
                        'g', 'g', 'g',
                        'g', 'g', 'g'};
 
-char orange_side = {'o', 'o', 'o',
+char orange_side[9] = {'o', 'o', 'o',
                        'o', 'o', 'o',
                        'o', 'o', 'o'};
 
+String raw_cube_string = "";
 
 // prints one side of a cube (used for diagnostic purposes)
 void print_cube(char cube_side[])
@@ -88,24 +89,91 @@ void print_whole_cube()
 	print_cube(orange_side);
 }
 
+////////////////////// Serial Communication (receive arrays from .py script)
+
+
+void accept_string()
+{
+	char ready_signal = 'ready';
+	char received_signal = 'recieved';
+	
+	for (int piece_num = 0; piece_num < 54; piece_num++)
+	{	
+		// send ready signal
+		Serial.println(ready_signal);
+		delay(5);
+	}
+	// receive string
+	while(raw_cube_string == "")
+	{
+		char character;
+		while(Serial.available()) 
+		{
+		    character = Serial.read();
+		   	raw_cube_string.concat(character);
+		}
+	}
+	delay(10);
+	Serial.print("String Accepted: ");
+	//Serial.print(raw_cube_string);
+
+	// send color confirmed signal
+	Serial.println(received_signal);
+	delay(10);
+}
+
+void parse_raw_cube() // need an input of 54 char length string
+{	
+	// convert to char array
+	Serial.print("Parsing... ");
+	raw_cube_string.toCharArray(yellow_side, sizeof(yellow_side));
+	
+	// assign to cube sides:
+	Serial.println("yellow...");
+	for(int x = 0; x < 9; x++)
+	{
+		yellow_side[x] = raw_cube_string[x];
+	}
+	
+	Serial.println("white...");
+	for(int x = 9; x < 18; x++)
+	{
+		white_side[x-9] = raw_cube_string[x];
+	}
+
+	Serial.println("red...");
+	for(int x = 18; x < 27; x++)
+	{
+		red_side[x-18] = raw_cube_string[x];
+	}
+
+	Serial.println("blue...");
+	for(int x = 27; x < 36; x++)
+	{
+		blue_side[x-27] = raw_cube_string[x];
+	}
+
+	Serial.println("green...");
+	for(int x = 36; x < 45; x++)
+	{
+		green_side[x-36] = raw_cube_string[x];
+	}
+
+	Serial.println("orange...");
+	for(int x = 45; x < 54; x++)
+	{
+		orange_side[x-45] = raw_cube_string[x];
+	}
+}
 
 // imports cube colors from .py file through serial
 void import_cube_colors()
 {
-	// get all of the cube colors from serial input
-		// format: y, y, y OR y b g
+	accept_string();
 
-	// make another loop for each face
-	for(int piece = 0; piece < 9; piece++)	// go through each piece
-	{
-		yellow_side[piece] = Serial.read();
-	}
-
-	// parse plain text sequence of colors
-	 // search string cantenation like in hk_translate
-
-	// print finished product
+	parse_raw_cube();
 	print_whole_cube();
+	while(true){}
 }
 ///////////////////// Physical Movement Functions ///////////////////////////
 
