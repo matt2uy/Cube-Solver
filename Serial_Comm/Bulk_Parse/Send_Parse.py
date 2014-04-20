@@ -16,7 +16,7 @@ while all_cubes assigned == False:
 
 import serial
 import time
-ser = serial.Serial('/dev/ttyACM5', 9600)
+ser = serial.Serial('/dev/ttyACM6', 9600)
 
 # reset arduino
 ser.setDTR(False) # Drop DTR
@@ -48,7 +48,7 @@ orange_face = ['a', 'b', 'c',
 		 	   'a', 'o', 'f',
 			   'g', 'h', 'i']
 
-raw_cube_string = 'abcdefghi'
+raw_cube_string = "qwertyuioasdfghjklzxcvbnmzxpoiuytrewvfvfvfvfvhjkhjkhjk"
 
 ############################ 
 #def generate_raw_cube():

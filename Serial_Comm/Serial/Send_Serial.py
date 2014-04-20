@@ -16,7 +16,7 @@ while all_cubes assigned == False:
 
 import serial
 import time
-ser = serial.Serial('/dev/ttyACM1', 9600)
+ser = serial.Serial('/dev/ttyACM4', 9600)
 
 # reset arduino
 ser.setDTR(False) # Drop DTR
