@@ -1,12 +1,14 @@
 """
+corresponds with receive_parse.cpp
+
 Transfers the 6 cube face arrays 
 from the computer  (here)
 to their equivalent 
 in the arduino
 
 
-Run here: $ cd Dropbox/'Cube Solver'/Code/Serial_Comm/Serial
-		  $ python Serial_Send.py
+Run here: $ cd Dropbox/'Cube Solver'/Code/Serial_Comm/Bulk_Parse
+		  $ python Serial_Parse.py
 
 while all_cubes assigned == False:
 	arduino: ready
@@ -16,7 +18,7 @@ while all_cubes assigned == False:
 
 import serial
 import time
-ser = serial.Serial('/dev/ttyACM1', 9600)
+ser = serial.Serial('/dev/ttyACM2', 9600)
 
 # reset arduino
 ser.setDTR(False) # Drop DTR
@@ -44,11 +46,11 @@ green_face = ['a', 'b', 'c',
 		 	  'd', 'g', 'f',
 			  'g', 'h', 'i']
 
-orange_face = ['a', 'b', 'c',
-		 	   'a', 'o', 'f',
+orange_face = ['g', 'o', 'c',
+		 	   'g', 'o', 'o',
 			   'g', 'h', 'i']
 
-new_cube_string = ""
+raw_cube_string = ""
 
 def generate_raw_cube():
 	raw_cube_string = ""
@@ -75,7 +77,7 @@ def generate_raw_cube():
 	for color in orange_face:
 		raw_cube_string = raw_cube_string + color
 		#catenate 'raw_cube_string' with yellow_face[0], [1], on and on.....
-
+	return raw_cube_string
 # send all colors to arduino in one string
 def send_raw_cube():
 	ready_signal = ser.readline()	# original signal message
@@ -100,4 +102,5 @@ raw_cube_string = generate_raw_cube()
 send_raw_cube()	
 while True:
 	time.sleep(0.01)
+	# show cube colours from arduino
 	print ser.readline()
