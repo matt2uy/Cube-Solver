@@ -98,6 +98,11 @@ def send_raw_cube():
 
 	time.sleep(0.01)
 
+############## Script start ###################
+
+
+# do gui stuff
+# make a function for this
 raw_cube_string = generate_raw_cube()
 send_raw_cube()	
 while True:
