@@ -9,6 +9,7 @@ Dependencies:
 - pyserial
 - arduino ide/codebender...etc...
 - python 2.7 or later
+- tkinter
 
 More info:
 -instructable
