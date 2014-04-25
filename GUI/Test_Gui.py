@@ -11,32 +11,32 @@ def change_color(x, b=bord):
     c=x%3
     if b[r][c] == 0:
         b[r][c]= 5
-        bb[x].ss.configure(bg='white')
+        bb[x].ss.configure(bg='white', activebackground='white')
         counter = 1
 
     elif counter == 0:
-        bb[x].ss.configure(bg='white')
+        bb[x].ss.configure(bg='white', activebackground='yellow')
         counter = 1
 
     elif counter == 1:
-        bb[x].ss.configure(bg='blue')
+        bb[x].ss.configure(bg='blue', activebackground='blue')
         counter = 2
 
         ### keep following the cycle of white-yellow-red...
     elif counter == 2:
-        bb[x].ss.configure(bg='red')
+        bb[x].ss.configure(bg='red', activebackground='red')
         counter = 3
 
     elif counter == 3:
-        bb[x].ss.configure(bg='green')
+        bb[x].ss.configure(bg='green', activebackground='green')
         counter = 4
 
     elif counter == 4:
-        bb[x].ss.configure(bg='orange')
+        bb[x].ss.configure(bg='orange', activebackground='orange')
         counter = 5
 
     elif counter == 5:
-        bb[x].ss.configure(bg='yellow')
+        bb[x].ss.configure(bg='yellow', activebackground='yellow')
         counter = 0
 
 
@@ -54,7 +54,7 @@ class Knop():
         def human_move():
             print 'knop nummer', self.nummer  ,'ingedrukt'
             change_color(self.nummer)
-        self.ss = Button(root, command=human_move, bg='yellow', width=10, height=5)
+        self.ss = Button(root, command=human_move, bg='yellow', activebackground='yellow', width=10, height=5)
         self.ss.grid(row=self.row, column=self.col)
 
 bb = range(9)
