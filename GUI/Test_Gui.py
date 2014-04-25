@@ -57,8 +57,6 @@ def change_color(x, b=bord):
         print 'yellow'
         red_face[x] = 'y'
 
-
-
 root = Tk()
 root.title('Enter Cube State')
 
@@ -72,8 +70,14 @@ class Knop():
         def human_move():
             print 'knop nummer', self.nummer  ,'ingedrukt'
             change_color(self.nummer)
-        self.ss = Button(root, repeatinterval=100, command=human_move, bg='yellow', activebackground='yellow', width=10, height=5)
-        self.ss.grid(row=self.row, column=self.col)
+        self.ss = Button(root, command=human_move, bg='yellow', activebackground='yellow', width=10, height=5)
+        self.ss.grid(row=self.row, column=self.col) 
+        
+        next_face = Button(root, text="Next Face")
+        next_face.grid(row=4, column=0) 
+
+        done = Button(root, text="Done")
+        done.grid(row=4, column=2) 
 
 bb = range(9)
 for i in range(9):
