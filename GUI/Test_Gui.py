@@ -99,10 +99,7 @@ def enter_yellow_face():
             self.ss.grid(row=self.row, column=self.col) 
             
             next_face = Button(root, text="Next Face",  command=root.destroy)
-            next_face.grid(row=4, column=0) 
-
-            done = Button(root, text="Done")
-            done.grid(row=4, column=2) 
+            next_face.grid(row=4, column=1)  
 
     bb = range(9)
     for i in range(9):
@@ -182,10 +179,7 @@ def enter_white_face():
             self.ss.grid(row=self.row, column=self.col) 
             
             next_face = Button(root, text="Next Face",  command=root.destroy)
-            next_face.grid(row=4, column=0) 
-
-            done = Button(root, text="Done")
-            done.grid(row=4, column=2) 
+            next_face.grid(row=4, column=1)
 
     bb = range(9)
     for i in range(9):
@@ -265,10 +259,7 @@ def enter_blue_face():
             self.ss.grid(row=self.row, column=self.col) 
             
             next_face = Button(root, text="Next Face",  command=root.destroy)
-            next_face.grid(row=4, column=0) 
-
-            done = Button(root, text="Done")
-            done.grid(row=4, column=2) 
+            next_face.grid(row=4, column=1) 
 
     bb = range(9)
     for i in range(9):
@@ -348,10 +339,7 @@ def enter_red_face():
             self.ss.grid(row=self.row, column=self.col) 
             
             next_face = Button(root, text="Next Face",  command=root.destroy)
-            next_face.grid(row=4, column=0) 
-
-            done = Button(root, text="Done")
-            done.grid(row=4, column=2) 
+            next_face.grid(row=4, column=1) 
 
     bb = range(9)
     for i in range(9):
@@ -431,10 +419,7 @@ def enter_green_face():
             self.ss.grid(row=self.row, column=self.col) 
             
             next_face = Button(root, text="Next Face",  command=root.destroy)
-            next_face.grid(row=4, column=0) 
-
-            done = Button(root, text="Done")
-            done.grid(row=4, column=2) 
+            next_face.grid(row=4, column=1)
 
     bb = range(9)
     for i in range(9):
@@ -514,10 +499,7 @@ def enter_orange_face():
             self.ss.grid(row=self.row, column=self.col) 
             
             next_face = Button(root, text="Next Face",  command=root.destroy)
-            next_face.grid(row=4, column=0) 
-
-            done = Button(root, text="Done")
-            done.grid(row=4, column=2) 
+            next_face.grid(row=4, column=1) 
 
     bb = range(9)
     for i in range(9):
