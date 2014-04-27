@@ -9,13 +9,8 @@ in the arduino
 
 Run here: $ cd Dropbox/'Cube Solver'/Code/Serial_Comm/Bulk_Parse
 		  $ python Serial_Parse.py
-
-while all_cubes assigned == False:
-	arduino: ready
-	computer: send
-	arduino: recieve
 """
-
+from Tkinter import *
 import serial
 import time
 ser = serial.Serial('/dev/ttyACM0', 9600)
@@ -27,28 +22,28 @@ ser.setDTR(True)  # Up the DTR back
 
 
 yellow_face = ['y', 'y', 'y',
-		 	   'd', 'y', 'y',
-			   'g', 'y', 'y']
+               'y', 'y', 'y',
+               'y', 'y', 'y']
 
-white_face = ['a', 'b', 'c',
-		 	  'd', 'w', 'f',
-			  'g', 'h', 'i']
+white_face = ['w', 'w', 'w',
+              'w', 'w', 'w',
+              'w', 'w', 'w']
 
-blue_face = ['a', 'b', 'c',
-		 	 'b', 'b', 'f',
-			 'g', 'h', 'i']
+blue_face = ['b', 'b', 'b',
+             'b', 'b', 'b',
+             'b', 'b', 'b']
 
-red_face = ['a', 'r', 'c',
-		 	'd', 'r', 'f',
-			'g', 'h', 'i']
+red_face = ['r', 'r', 'r',
+            'r', 'r', 'r',
+            'r', 'r', 'r']
 
-green_face = ['a', 'b', 'c',
-		 	  'd', 'g', 'f',
-			  'g', 'h', 'i']
+green_face = ['g', 'g', 'g',
+              'g', 'g', 'g',
+              'g', 'g', 'g']
 
-orange_face = ['g', 'o', 'c',
-		 	   'g', 'o', 'o',
-			   'g', 'h', 'i']
+orange_face = ['o', 'o', 'o',
+               'o', 'o', 'o',
+               'o', 'o', 'o']
 
 raw_cube_string = ""
 
@@ -102,9 +97,12 @@ def send_raw_cube():
 
 
 # do gui stuff
+
+
 # make a function for this
-raw_cube_string = generate_raw_cube()
-send_raw_cube()	
+print "sending cube string..."
+'''raw_cube_string = generate_raw_cube()
+send_raw_cube()	'''
 while True:
 	time.sleep(0.01)
 	# show cube colours from arduino

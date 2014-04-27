@@ -27,10 +27,6 @@ orange_face = ['o', 'o', 'o',
 def enter_yellow_face():
     top,mid,btm=[0,0,0],[0,0,0],[0,0,0]
     bord = [top,mid,btm]
-
-    yellow_face = ['y', 'y', 'y',
-                'y', 'y', 'y',
-                'y', 'y', 'y']
     counter = [0, 0, 0,
                0, 0, 0,
                0, 0, 0]
@@ -44,45 +40,38 @@ def enter_yellow_face():
             b[r][c]= 5
             bb[x].ss.configure(bg='white', activebackground='white')
             counter[x] = 1
-            print 'white'
             yellow_face[x] = 'w'
 
         elif counter[x] == 0:
-            bb[x].ss.configure(bg='white', activebackground='white')
+            bb[x].ss.configure(bg='blue', activebackground='blue')
             counter[x] = 1
-            print 'white'
-            yellow_face[x] = 'w'
+            yellow_face[x] = 'b'
 
         elif counter[x] == 1:
-            bb[x].ss.configure(bg='blue', activebackground='blue')
+            bb[x].ss.configure(bg='red', activebackground='red')
             counter[x] = 2
-            print 'blue'
-            yellow_face[x] = 'b'
+            yellow_face[x] = 'r'
 
             ### keep following the cycle of white-yellow-red...
         elif counter[x] == 2:
-            bb[x].ss.configure(bg='red', activebackground='red')
-            counter[x] = 3
-            print 'red'
-            yellow_face[x] = 'r'
-
-        elif counter[x] == 3:
             bb[x].ss.configure(bg='green', activebackground='green')
-            counter[x] = 4
-            print 'green'
+            counter[x] = 3
             yellow_face[x] = 'g'
 
-        elif counter[x] == 4:
+        elif counter[x] == 3:
             bb[x].ss.configure(bg='orange', activebackground='orange')
-            counter[x] = 5
-            print 'orange'
+            counter[x] = 4
             yellow_face[x] = 'o'
 
-        elif counter[x] == 5:
+        elif counter[x] == 4:
             bb[x].ss.configure(bg='yellow', activebackground='yellow')
-            counter[x] = 0
-            print 'yellow'
+            counter[x] = 5
             yellow_face[x] = 'y'
+
+        elif counter[x] == 5:
+            bb[x].ss.configure(bg='white', activebackground='white')
+            counter[x] = 0
+            yellow_face[x] = 'w'
 
     root = Tk()
     root.title('Enter Yellow Face')
@@ -95,7 +84,6 @@ def enter_yellow_face():
             self.row = i/3
             self.col = i%3
             def human_move():
-                print 'knop nummer', self.nummer  ,'ingedrukt'
                 change_color(self.nummer)
             self.ss = Button(root, command=human_move, bg='yellow', activebackground='yellow', width=10, height=5)
             self.ss.grid(row=self.row, column=self.col) 
@@ -124,44 +112,37 @@ def enter_white_face():
             b[r][c]= 5
             bb[x].ss.configure(bg='blue', activebackground='blue')
             counter[x] = 1
-            print 'blue'
             white_face[x] = 'b'
 
         elif counter[x] == 0:
             bb[x].ss.configure(bg='red', activebackground='red')
             counter[x] = 1
-            print 'red'
             white_face[x] = 'r'
 
         elif counter[x] == 1:
             bb[x].ss.configure(bg='green', activebackground='green')
             counter[x] = 2
-            print 'green'
             white_face[x] = 'g'
 
             ### keep following the cycle of white-yellow-red...
         elif counter[x] == 2:
             bb[x].ss.configure(bg='orange', activebackground='orange')
             counter[x] = 3
-            print 'orange'
             white_face[x] = 'o'
 
         elif counter[x] == 3:
             bb[x].ss.configure(bg='yellow', activebackground='yellow')
             counter[x] = 4
-            print 'yellow'
             white_face[x] = 'y'
 
         elif counter[x] == 4:
             bb[x].ss.configure(bg='white', activebackground='white')
             counter[x] = 5
-            print 'white'
             white_face[x] = 'w'
 
         elif counter[x] == 5:
             bb[x].ss.configure(bg='blue', activebackground='blue')
             counter[x] = 0
-            print 'blue'
             white_face[x] = 'b'
 
     root = Tk()
@@ -175,7 +156,6 @@ def enter_white_face():
             self.row = i/3
             self.col = i%3
             def human_move():
-                print 'knop nummer', self.nummer  ,'ingedrukt'
                 change_color(self.nummer)
             self.ss = Button(root, command=human_move, bg='white', activebackground='white', width=10, height=5)
             self.ss.grid(row=self.row, column=self.col) 
@@ -205,44 +185,37 @@ def enter_blue_face():
             b[r][c]= 5
             bb[x].ss.configure(bg='red', activebackground='red')
             counter[x] = 0
-            print 'red'
             blue_face[x] = 'r'
 
         elif counter[x] == 0:
             bb[x].ss.configure(bg='green', activebackground='green')
             counter[x] = 1
-            print 'green'
             blue_face[x] = 'g'
 
         elif counter[x] == 1:
             bb[x].ss.configure(bg='orange', activebackground='orange')
             counter[x] = 2
-            print 'orange'
             blue_face[x] = 'o'
 
             ### keep following the cycle of white-yellow-red...
         elif counter[x] == 2:
             bb[x].ss.configure(bg='yellow', activebackground='yellow')
             counter[x] = 3
-            print 'yellow'
             blue_face[x] = 'y'
 
         elif counter[x] == 3:
             bb[x].ss.configure(bg='white', activebackground='white')
             counter[x] = 4
-            print 'white'
             blue_face[x] = 'w'
 
         elif counter[x] == 4:
             bb[x].ss.configure(bg='blue', activebackground='blue')
             counter[x] = 5
-            print 'blue'
             blue_face[x] = 'b'
 
         elif counter[x] == 5:
             bb[x].ss.configure(bg='red', activebackground='red')
             counter[x] = 0
-            print 'red'
             blue_face[x] = 'r'
 
     root = Tk()
@@ -256,7 +229,6 @@ def enter_blue_face():
             self.row = i/3
             self.col = i%3
             def human_move():
-                print 'knop nummer', self.nummer  ,'ingedrukt'
                 change_color(self.nummer)
             self.ss = Button(root, command=human_move, bg='blue', activebackground='blue', width=10, height=5)
             self.ss.grid(row=self.row, column=self.col) 
@@ -286,44 +258,37 @@ def enter_red_face():
             b[r][c]= 5
             bb[x].ss.configure(bg='green', activebackground='green')
             counter[x] = 1
-            print 'green'
             red_face[x] = 'g'
 
         elif counter[x] == 0:
             bb[x].ss.configure(bg='orange', activebackground='orange')
             counter[x] = 1
-            print 'orange'
             red_face[x] = 'o'
 
         elif counter[x] == 1:
             bb[x].ss.configure(bg='yellow', activebackground='yellow')
             counter[x] = 2
-            print 'yellow'
             red_face[x] = 'y'
 
             ### keep following the cycle of white-yellow-red...
         elif counter[x] == 2:
             bb[x].ss.configure(bg='white', activebackground='white')
             counter[x] = 3
-            print 'white'
             red_face[x] = 'w'
 
         elif counter[x] == 3:
             bb[x].ss.configure(bg='blue', activebackground='blue')
             counter[x] = 4
-            print 'blue'
             red_face[x] = 'b'
 
         elif counter[x] == 4:
             bb[x].ss.configure(bg='red', activebackground='red')
             counter[x] = 5
-            print 'red'
             red_face[x] = 'r'
 
         elif counter[x] == 5:
             bb[x].ss.configure(bg='green', activebackground='green')
             counter[x] = 0
-            print 'green'
             red_face[x] = 'g'
 
     root = Tk()
@@ -337,7 +302,6 @@ def enter_red_face():
             self.row = i/3
             self.col = i%3
             def human_move():
-                print 'knop nummer', self.nummer  ,'ingedrukt'
                 change_color(self.nummer)
             self.ss = Button(root, command=human_move, bg='red', activebackground='red', width=10, height=5)
             self.ss.grid(row=self.row, column=self.col) 
@@ -367,44 +331,37 @@ def enter_green_face():
             b[r][c]= 5
             bb[x].ss.configure(bg='orange', activebackground='orange')
             counter[x] = 1
-            print 'orange'
             green_face[x] = 'o'
 
         elif counter[x] == 0:
             bb[x].ss.configure(bg='yellow', activebackground='yellow')
             counter[x] = 1
-            print 'yellow'
             green_face[x] = 'y'
 
         elif counter[x] == 1:
             bb[x].ss.configure(bg='white', activebackground='white')
             counter[x] = 2
-            print 'white'
             green_face[x] = 'w'
 
             ### keep following the cycle of white-yellow-red...
         elif counter[x] == 2:
             bb[x].ss.configure(bg='blue', activebackground='blue')
             counter[x] = 3
-            print 'blue'
             green_face[x] = 'b'
 
         elif counter[x] == 3:
             bb[x].ss.configure(bg='red', activebackground='red')
             counter[x] = 4
-            print 'red'
             green_face[x] = 'r'
 
         elif counter[x] == 4:
             bb[x].ss.configure(bg='green', activebackground='green')
             counter[x] = 5
-            print 'green'
             green_face[x] = 'g'
 
         elif counter[x] == 5:
             bb[x].ss.configure(bg='orange', activebackground='orange')
             counter[x] = 0
-            print 'orange'
             green_face[x] = 'o'
 
     root = Tk()
@@ -418,7 +375,6 @@ def enter_green_face():
             self.row = i/3
             self.col = i%3
             def human_move():
-                print 'knop nummer', self.nummer  ,'ingedrukt'
                 change_color(self.nummer)
             self.ss = Button(root, command=human_move, bg='green', activebackground='green', width=10, height=5)
             self.ss.grid(row=self.row, column=self.col) 
@@ -448,44 +404,37 @@ def enter_orange_face():
             b[r][c]= 5
             bb[x].ss.configure(bg='yellow', activebackground='yellow')
             counter[x] = 1
-            print 'yellow'
             orange_face[x] = 'y'
 
         elif counter[x] == 0:
             bb[x].ss.configure(bg='white', activebackground='white')
             counter[x] = 1
-            print 'white'
             orange_face[x] = 'w'
 
         elif counter[x] == 1:
             bb[x].ss.configure(bg='blue', activebackground='blue')
             counter[x] = 2
-            print 'blue'
             orange_face[x] = 'b'
 
             ### keep following the cycle of white-yellow-red...
         elif counter[x] == 2:
             bb[x].ss.configure(bg='red', activebackground='red')
             counter[x] = 3
-            print 'red'
             orange_face[x] = 'r'
 
         elif counter[x] == 3:
             bb[x].ss.configure(bg='green', activebackground='green')
             counter[x] = 4
-            print 'green'
             orange_face[x] = 'g'
 
         elif counter[x] == 4:
             bb[x].ss.configure(bg='orange', activebackground='orange')
             counter[x] = 5
-            print 'orange'
             orange_face[x] = 'o'
 
         elif counter[x] == 5:
             bb[x].ss.configure(bg='yellow', activebackground='yellow')
             counter[x] = 0
-            print 'yellow'
             orange_face[x] = 'y'
 
     root = Tk()
@@ -499,7 +448,6 @@ def enter_orange_face():
             self.row = i/3
             self.col = i%3
             def human_move():
-                print 'knop nummer', self.nummer  ,'ingedrukt'
                 change_color(self.nummer)
             self.ss = Button(root, command=human_move, bg='orange', activebackground='orange', width=10, height=5)
             self.ss.grid(row=self.row, column=self.col) 
