@@ -97,11 +97,11 @@ void accept_string()
 	char ready_signal = 'ready';
 	char received_signal = 'recieved';
 	
-	for (int piece_num = 0; piece_num < 54; piece_num++)
+	for (int piece_num = 0; piece_num <10; piece_num++)
 	{	
 		// send ready signal
 		Serial.println(ready_signal);
-		delay(5);
+		delay(1000);
 	}
 	// receive string
 	while(raw_cube_string == "")

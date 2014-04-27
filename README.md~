@@ -1,9 +1,11 @@
 # This is my README
+An Arduino robot that solves a rubiks cube.
 
 Cube_Solver
 
 How to use:
-1. 
+1. Flash Cube_Solver.cpp to Arduino
+2. Run Send_Cube_State.py
 
 Dependencies:
 - pyserial
