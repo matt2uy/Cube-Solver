@@ -39,7 +39,7 @@ def enter_yellow_face():
         if b[r][c] == 0:
             b[r][c]= 5
             bb[x].ss.configure(bg='white', activebackground='white')
-            counter[x] = 1
+            counter[x] = 0
             yellow_face[x] = 'w'
 
         elif counter[x] == 0:
@@ -111,7 +111,7 @@ def enter_white_face():
         if b[r][c] == 0:
             b[r][c]= 5
             bb[x].ss.configure(bg='blue', activebackground='blue')
-            counter[x] = 1
+            counter[x] = 0
             white_face[x] = 'b'
 
         elif counter[x] == 0:
@@ -257,7 +257,7 @@ def enter_red_face():
         if b[r][c] == 0:
             b[r][c]= 5
             bb[x].ss.configure(bg='green', activebackground='green')
-            counter[x] = 1
+            counter[x] = 0
             red_face[x] = 'g'
 
         elif counter[x] == 0:
@@ -330,7 +330,7 @@ def enter_green_face():
         if b[r][c] == 0:
             b[r][c]= 5
             bb[x].ss.configure(bg='orange', activebackground='orange')
-            counter[x] = 1
+            counter[x] = 0
             green_face[x] = 'o'
 
         elif counter[x] == 0:
@@ -403,7 +403,7 @@ def enter_orange_face():
         if b[r][c] == 0:
             b[r][c]= 5
             bb[x].ss.configure(bg='yellow', activebackground='yellow')
-            counter[x] = 1
+            counter[x] = 0
             orange_face[x] = 'y'
 
         elif counter[x] == 0:
@@ -460,9 +460,6 @@ def enter_orange_face():
         bb[i]= Knop(i, master=root)
 
     mainloop()
-
-
-
 
 def print_face(current_face):
     print current_face[0], current_face[1], current_face[2]
