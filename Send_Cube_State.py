@@ -15,10 +15,10 @@ import serial
 import time
 ser = serial.Serial('/dev/ttyACM2', 9600)
 
-# reset arduino
-ser.setDTR(False) # Drop DTR
-time.sleep(0.022) # similar to ide
-ser.setDTR(True)  # Up the DTR back
+def reset_arduino():
+	ser.setDTR(False) # Drop DTR
+	time.sleep(0.022) # similar to ide
+	ser.setDTR(True)  # Up the DTR back
 
 
 yellow_face = ['y', 'y', 'y',
@@ -569,6 +569,7 @@ def enter_cube():
 enter_cube()
 print_cube()
 
+reset_arduino()
 
 
 # make a function for this
