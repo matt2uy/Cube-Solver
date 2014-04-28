@@ -3279,7 +3279,7 @@ void rotation_test()
 void setup()
 {
 	rotate_servo.attach(9);  // attaches the servo on pin 9 to the servo object
-	push_servo.attach(5);  // attaches the servo on pin 6 to the servo object
+	push_servo.attach(6);  // attaches the servo on pin 6 to the servo object
 	rotate_servo.write(rotate_pos);
 	push_servo.write(push_pos);
 	delay(1000);
@@ -3292,6 +3292,10 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
+	//import_cube_colors();
+	//rotation_test();
+	//push_cube();
+
 	/*
 	//cube_legality_check();
 	//print_cube(white_side);
@@ -3305,5 +3309,4 @@ void loop()
 	//do_cross();
 	//right();
 	*/
-	import_cube_colors();
 };

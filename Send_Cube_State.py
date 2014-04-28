@@ -13,7 +13,7 @@ Run here: $ cd Dropbox/'Cube Solver'/Code/Serial_Comm/Bulk_Parse
 from Tkinter import *
 import serial
 import time
-ser = serial.Serial('/dev/ttyACM2', 9600)
+ser = serial.Serial('/dev/ttyACM4', 9600)
 
 def reset_arduino():
 	ser.setDTR(False) # Drop DTR
