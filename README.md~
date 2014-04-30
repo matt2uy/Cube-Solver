@@ -1,4 +1,6 @@
 # This is my README
+Github:
+
 An Arduino robot that solves a rubiks cube.
 
 Cube_Solver
@@ -12,6 +14,9 @@ Dependencies:
 - arduino ide/codebender...etc...
 - python 2.7 or later
 - tkinter
+
+Video:
+How to:
 
 More info:
 -instructable

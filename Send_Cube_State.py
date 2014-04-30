@@ -13,13 +13,13 @@ Run here: $ cd Dropbox/'Cube Solver'/Code/Serial_Comm/Bulk_Parse
 from Tkinter import *
 import serial
 import time
-ser = serial.Serial('/dev/ttyACM4', 9600)
+#ser = serial.Serial('/dev/ttyACM0', 9600)
+ser = serial.Serial('/dev/ttyACM7', 9600) 
 
 def reset_arduino():
 	ser.setDTR(False) # Drop DTR
 	time.sleep(0.022) # similar to ide
 	ser.setDTR(True)  # Up the DTR back
-
 
 yellow_face = ['y', 'y', 'y',
                'y', 'y', 'y',
@@ -561,6 +561,7 @@ def enter_cube():
     enter_red_face()
     enter_green_face()
     enter_orange_face()
+
 ############## Script start ###################
 
 
@@ -569,14 +570,20 @@ def enter_cube():
 enter_cube()
 print_cube()
 
-reset_arduino()
+###### put in function send_cube_state(): #########
 
+reset_arduino() # get arduino ready
+# wait until arduino sends out request for the cube string
+while ser.readline() == "":
+    #nothing
+    print "Waiting for Arduino..."
 
-# make a function for this
+# send cube string
 print "sending cube string..."
 raw_cube_string = generate_raw_cube()
 send_raw_cube()
 while True:
-	time.sleep(0.01)
-	# show cube colours from arduino
-	print ser.readline()
+    time.sleep(0.01)
+    # show cube colours from arduino
+    print ser.readline()
+

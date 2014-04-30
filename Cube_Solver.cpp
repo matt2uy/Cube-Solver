@@ -58,7 +58,7 @@ String raw_cube_string = "";
 void print_cube(char cube_side[])
 {
 	// make a for loop for this
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		Serial.println('\r');
 	}
@@ -173,7 +173,9 @@ void import_cube_colors()
 
 	parse_raw_cube();
 	print_whole_cube();
-	while(true){}
+
+	delay(1000);
+	Serial.println("Starting Now...");
 }
 ///////////////////// Physical Movement Functions ///////////////////////////
 
@@ -3292,21 +3294,18 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
-	//import_cube_colors();
-	//rotation_test();
-	//push_cube();
+	import_cube_colors();
 
+	superflip();
+
+	while(true){}
 	/*
+	//rotation_test();
+	//superflip();
 	//cube_legality_check();
 	//print_cube(white_side);
 	auto_test();
-	//superflip();
-	//rotation_test();
 	//single_run();
-	//print_whole_cube();
 	delay(10000000);
-
-	//do_cross();
-	//right();
 	*/
 };
