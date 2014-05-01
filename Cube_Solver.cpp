@@ -272,7 +272,7 @@ void rotate_two()
 		if (rotate_pos < 50) 
 		{
 			move_servo(rotate_pos, rotate_finish+12, 9);
-			move_servo(rotate_pos, rotate_finish-5, 9);
+			move_servo(rotate_pos, rotate_finish-3, 9);
 		}
 		// rotate from rotate_three
 		else if (rotate_pos > 150) 
@@ -3180,8 +3180,10 @@ void cube_decide()
 
 //////////// run these on main loop ////////////////////
 
+// automatically scrambles and solves cubes (normally used without cube, to test the algorithm)
 void auto_test()
 {
+	Serial.println("Auto (Algorithm) Test:");
 	int num_of_tests_ran = 1;
 	while(test_ongoing == true)
 	{
@@ -3219,6 +3221,7 @@ void auto_test()
 
 void single_run()
 {
+	Serial.println("Single Run: ");
 	print_whole_cube();
 	solve_stage = 1;
 	// solve the cube
@@ -3228,9 +3231,10 @@ void single_run()
 	}
 }
 
-// test rotation servo
+// test all possible rotation combinations (for mechanical testing)
 void rotation_test()
 {
+	Serial.println("Rotation Test:");
 	/*
 	rotate_one();
 	//hold_cube();
@@ -3294,18 +3298,21 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
-	import_cube_colors();
+	//import_cube_colors();
 
-	superflip();
+	//superflip();
+	//single_run();
+	rotation_test();
+	Serial.println("Done!");
 
 	while(true){}
 	/*
 	//rotation_test();
-	//superflip();
 	//cube_legality_check();
 	//print_cube(white_side);
 	auto_test();
 	//single_run();
 	delay(10000000);
 	*/
+	
 };
