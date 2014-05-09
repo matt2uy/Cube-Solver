@@ -16,7 +16,7 @@ Servo rotate_servo;
 Servo push_servo;
 
 int move_speed = 5;
-int buffer_time = 200;
+int buffer_time = 100; // time between moves
 int rotate_pos = 90;
 int push_pos = 140;
 int hold_progress = 3;
@@ -96,7 +96,7 @@ void accept_string()
 {
 	char ready_signal = 'ready';
 	char received_signal = 'recieved';
-	
+
 	for (int piece_num = 0; piece_num <5; piece_num++)
 	{	
 		// send ready signal
@@ -127,14 +127,14 @@ void parse_raw_cube() // need an input of 54 char length string
 	// convert to char array
 	Serial.print("Parsing... ");
 	raw_cube_string.toCharArray(yellow_side, sizeof(yellow_side));
-	
+
 	// assign to cube sides:
 	Serial.println("yellow...");
 	for(int x = 0; x < 9; x++)
 	{
 		yellow_side[x] = raw_cube_string[x];
 	}
-	
+
 	Serial.println("white...");
 	for(int x = 9; x < 18; x++)
 	{
@@ -232,6 +232,7 @@ void push_cube()
 	move_servo(140, 72, 6);
 	delay(buffer_time);
 	move_servo(72, 140, 6);
+	delay(buffer_time);
 }
 void hold_cube()
 {
@@ -245,11 +246,19 @@ void release_cube()
 }
 void rotate_one()
 {
-	int rotate_finish = 12;
+	int rotate_finish = 11;
 	if (hold_progress == 1) // hold progress 1 = hold
 	{
-		move_servo(rotate_pos, rotate_finish-8, 9);
-		move_servo(rotate_pos, rotate_finish+5, 9);
+		move_servo(rotate_pos, rotate_finish-11, 9);
+		move_servo(rotate_pos, rotate_finish, 9);
+		// fix: cube not fully turned
+		release_cube();
+		move_servo(rotate_pos, 100, 9);
+		hold_cube();
+		move_servo(rotate_pos, 83, 9);
+		move_servo(rotate_pos, 90, 9); // prevent pulling
+		release_cube();
+		move_servo(rotate_pos, 5, 9);
 		hold_progress = 2;
 	}
 	else if (hold_progress == 2) // hold progress 2 = release, but offset still there
@@ -271,14 +280,14 @@ void rotate_two()
 		// rotate from rotate_one
 		if (rotate_pos < 50) 
 		{
-			move_servo(rotate_pos, rotate_finish+12, 9);
-			move_servo(rotate_pos, rotate_finish-3, 9);
+			move_servo(rotate_pos, rotate_finish+19, 9);
+			move_servo(rotate_pos, rotate_finish, 9);
 		}
 		// rotate from rotate_three
 		else if (rotate_pos > 150) 
 		{
-			move_servo(rotate_pos, rotate_finish-5, 9);
-			move_servo(rotate_pos, rotate_finish+5, 9);
+			move_servo(rotate_pos, rotate_finish-12, 9);
+			move_servo(rotate_pos, rotate_finish, 9);
 		}
 		hold_progress = 2;
 	}
@@ -295,7 +304,7 @@ void rotate_two()
 }
 void rotate_three()
 {
-	int rotate_finish = 175;
+	int rotate_finish = 180;
 	if (hold_progress == 1) // hold progress 1 = hold
 	{
 		move_servo(rotate_pos, rotate_finish+5, 9);
@@ -305,7 +314,7 @@ void rotate_three()
 		release_cube();
 		move_servo(rotate_pos, 80, 9);
 		hold_cube();
-		move_servo(rotate_pos, 100, 9);
+		move_servo(rotate_pos, 102, 9);
 		move_servo(rotate_pos, 90, 9); // prevent pulling
 		release_cube();
 		move_servo(rotate_pos, 175, 9);
@@ -620,7 +629,7 @@ void right_inverted()
 void down()
 {
 	Serial.print("D, ");
-	
+
 	if (sim_only == false)
 	{
 		hold_cube();
@@ -693,7 +702,7 @@ void down()
 void down_inverted()
 {
 	Serial.print("D', ");
-	
+
 	if (sim_only == false)
 	{
 		hold_cube();
@@ -766,7 +775,7 @@ void down_inverted()
 void up()
 {
 	Serial.print("U, ");
-	
+
 	if (sim_only == false)
 	{
 		push_cube();
@@ -839,7 +848,7 @@ void up()
 void up_inverted()
 {
 	Serial.print("U', ");
-	
+
 	if (sim_only == false)
 	{
 		push_cube();
@@ -912,7 +921,7 @@ void up_inverted()
 void front()
 {
 	Serial.print("F, ");
-	
+
 	if (sim_only == false)
 	{
 	push_cube();
@@ -1217,7 +1226,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			rotate_one();
 			push_cube();
 			rotate_two();
-			
+
 			// cube simulation
 			for(int i = 0; i < 9; i++)	
 			{
@@ -1235,7 +1244,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			{
 				r_red_side[i] = red_side[i];
 			}
-		
+
 			for(int x = 0; x < 9; x++)
 			{
 				r_white_side[x] = white_side[x];
@@ -1262,7 +1271,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			{
 				blue_side[i] = r_red_side[i];
 			}
-		
+
 			white_side[0] = r_white_side[2];
 			white_side[1] = r_white_side[5];
 			white_side[2] = r_white_side[8];
@@ -1272,7 +1281,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			white_side[6] = r_white_side[0];
 			white_side[7] = r_white_side[3];
 			white_side[8] = r_white_side[6];
-			
+
 			yellow_side[0] = r_yellow_side[6];
 			yellow_side[1] = r_yellow_side[3];
 			yellow_side[2] = r_yellow_side[0];
@@ -1285,11 +1294,11 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			break;
 		case 'f': // CCW on F
 			Serial.print("[Cube Flip: CCW on F], ");
-			
+
 			rotate_three();
 			push_cube();
 			rotate_two();
-			
+
 			// assign colors to a copy of the face
 			for(int i = 0; i < 9; i++)
 			{
@@ -1307,7 +1316,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			{
 				r_red_side[i] = red_side[i];
 			}
-		
+
 			for(int x = 0; x < 9; x++)
 			{
 				r_white_side[x] = white_side[x];
@@ -1344,7 +1353,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			yellow_side[6] = r_yellow_side[0];
 			yellow_side[7] = r_yellow_side[3];
 			yellow_side[8] = r_yellow_side[6];
-			
+
 			white_side[0] = r_white_side[6];
 			white_side[1] = r_white_side[3];
 			white_side[2] = r_white_side[0];
@@ -1354,10 +1363,10 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			white_side[6] = r_white_side[8];
 			white_side[7] = r_white_side[5];
 			white_side[8] = r_white_side[2];
-			
+
 			break;
 		case 'U': // CW on U
-			
+
 			Serial.print("[Cube Flip: CW on U], ");
 
 			push_cube();
@@ -1367,8 +1376,8 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			push_cube();
 			push_cube();
 			push_cube();
-			
-			
+
+
 			for(int i = 0; i < 9; i++)
 			{
 				r_white_side[i] = white_side[i];
@@ -1376,7 +1385,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			for(int i = 0; i < 9; i++)
 			{
 				r_orange_side[i] = orange_side[i];
-				
+
 			}
 			for(int i = 0; i < 9; i++)
 			{
@@ -1386,7 +1395,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			{
 				r_red_side[i] = red_side[i];
 			}
-		
+
 			for(int x = 0; x < 9; x++)
 			{
 				r_blue_side[x] = blue_side[x];
@@ -1395,7 +1404,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			{
 				r_green_side[x] = green_side[x];
 			}
-			
+
 			orange_side[0] = r_white_side[8];
 			orange_side[1] = r_white_side[7];
 			orange_side[2] = r_white_side[6];
@@ -1405,8 +1414,8 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			orange_side[6] = r_white_side[2];
 			orange_side[7] = r_white_side[1];
 			orange_side[8] = r_white_side[0];
-			
-			
+
+
 			yellow_side[0] = r_orange_side[6];
 			yellow_side[1] = r_orange_side[3];
 			yellow_side[2] = r_orange_side[0];
@@ -1416,7 +1425,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			yellow_side[6] = r_orange_side[8];
 			yellow_side[7] = r_orange_side[5];
 			yellow_side[8] = r_orange_side[2];
-			
+
 			white_side[8] = r_red_side[6];
 			white_side[7] = r_red_side[3];
 			white_side[6] = r_red_side[0];
@@ -1426,7 +1435,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			white_side[2] = r_red_side[8];
 			white_side[1] = r_red_side[5];
 			white_side[0] = r_red_side[2];
-			
+
 			red_side[6] = r_yellow_side[0];
 			red_side[3] = r_yellow_side[1];
 			red_side[0] = r_yellow_side[2];
@@ -1436,7 +1445,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			red_side[8] = r_yellow_side[6];
 			red_side[5] = r_yellow_side[7];
 			red_side[2] = r_yellow_side[8];
-		
+
 			green_side[0] = r_green_side[2];
 			green_side[1] = r_green_side[5];
 			green_side[2] = r_green_side[8];
@@ -1446,7 +1455,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			green_side[6] = r_green_side[0];
 			green_side[7] = r_green_side[3];
 			green_side[8] = r_green_side[6];
-			
+
 			blue_side[0] = r_blue_side[6];
 			blue_side[1] = r_blue_side[3];
 			blue_side[2] = r_blue_side[0];
@@ -1466,7 +1475,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			push_cube();
 			push_cube();
 			push_cube();
-			
+
 			for(int i = 0; i < 9; i++)
 			{
 				r_white_side[i] = white_side[i];
@@ -1474,7 +1483,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			for(int i = 0; i < 9; i++)
 			{
 				r_orange_side[i] = orange_side[i];
-				
+
 			}
 			for(int i = 0; i < 9; i++)
 			{
@@ -1484,7 +1493,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			{
 				r_red_side[i] = red_side[i];
 			}
-		
+
 			for(int x = 0; x < 9; x++)
 			{
 				r_blue_side[x] = blue_side[x];
@@ -1493,7 +1502,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			{
 				r_green_side[x] = green_side[x];
 			}
-			
+
 			red_side[6] = r_white_side[0];
 			red_side[3] = r_white_side[1];
 			red_side[0] = r_white_side[2];
@@ -1503,8 +1512,8 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			red_side[8] = r_white_side[6];
 			red_side[5] = r_white_side[7];
 			red_side[2] = r_white_side[8];
-			
-			
+
+
 			white_side[0] = r_orange_side[6];
 			white_side[1] = r_orange_side[3];
 			white_side[2] = r_orange_side[0];
@@ -1514,7 +1523,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			white_side[6] = r_orange_side[8];
 			white_side[7] = r_orange_side[5];
 			white_side[8] = r_orange_side[2];
-			
+
 			yellow_side[0] = r_red_side[6];
 			yellow_side[1] = r_red_side[3];
 			yellow_side[2] = r_red_side[0];
@@ -1524,7 +1533,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			yellow_side[6] = r_red_side[8];
 			yellow_side[7] = r_red_side[5];
 			yellow_side[8] = r_red_side[2];
-		
+
 			orange_side[6] = r_yellow_side[0];
 			orange_side[3] = r_yellow_side[1];
 			orange_side[0] = r_yellow_side[2];
@@ -1534,7 +1543,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			orange_side[8] = r_yellow_side[6];
 			orange_side[5] = r_yellow_side[7];
 			orange_side[2] = r_yellow_side[8];
-		
+
 			blue_side[0] = r_blue_side[2];
 			blue_side[1] = r_blue_side[5];
 			blue_side[2] = r_blue_side[8];
@@ -1544,7 +1553,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			blue_side[6] = r_blue_side[0];
 			blue_side[7] = r_blue_side[3];
 			blue_side[8] = r_blue_side[6];
-			
+
 			green_side[0] = green_side[6];
 			green_side[1] = green_side[3];
 			green_side[2] = green_side[0];
@@ -1554,7 +1563,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			green_side[6] = green_side[8];
 			green_side[7] = green_side[5];
 			green_side[8] = green_side[2];
-			
+
 		default:
 			Serial.println("INVALID CUBE ROTATION: SEE < void flip_cube() >");
 	}
@@ -2534,7 +2543,7 @@ void cube_decide_corners() // needs fixing, maybe yellows at bottom portion
 				flip_cube('f');
 			}
 		}
-	
+
 		else
 		{
 			Serial.println("First Layer not Solved.");
@@ -2571,7 +2580,7 @@ void cube_decide_add_edges()
 
 			add_edges_instance_1();	// two left
 		}
-	
+
 		//// blue3 --> orange
 		else if(blue_side[1] == 'b' && white_side[7] == 'o')
 		{
@@ -2600,7 +2609,7 @@ void cube_decide_add_edges()
 			flip_cube('f');
 			flip_cube('f');
 		}
-	
+
 		//// green3 --> red
 		else if(green_side[1] == 'g' && white_side[1] == 'r')
 		{
@@ -2903,7 +2912,7 @@ void cube_decide_oll()
 	{
 		back_inverted();
 	}
-	
+
 	if (green_side[0] == 'g' && green_side[2] == 'g' && red_side[0] == 'r' && red_side[2] == 'r' &&
 	   	blue_side[0] == 'b' && blue_side[2] == 'b' && orange_side[0] == 'o' && orange_side[2] == 'o')
 	{
@@ -3149,7 +3158,7 @@ void cube_decide()
 		case 3:
 			// First layer (corners)
 			cube_decide_corners();
-			
+
 			break;
 		case 4:
 			// Second Layer
@@ -3201,7 +3210,7 @@ void auto_test()
 		{
 			cube_decide();
 		}
-		
+
 		// check if solved
 		if (cube_solved == false)
 		{
@@ -3235,42 +3244,29 @@ void single_run()
 void rotation_test()
 {
 	Serial.println("Rotation Test:");
-	/*
-	rotate_one();
-	//hold_cube();
-	//release_cube();
-	push_cube();
 
-	rotate_two();
-	//hold_cube();
-	//release_cube();
-	push_cube();
-
-	rotate_three();
-	//hold_cube();
-	//release_cube();
-	push_cube();
-	*/
-	
-	//
+	Serial.println("rotate_one to rotate_two");
 	rotate_one();
 	hold_cube();
 	rotate_two();
 	release_cube();
 	push_cube();
 
+	Serial.println("rotate_two to rotate_one");
 	rotate_two();
 	hold_cube();
 	rotate_one();
 	release_cube();
 	push_cube();
-	
+
+	Serial.println("rotate_two to rotate_three");
 	rotate_two();
 	hold_cube();
 	rotate_three();
 	release_cube();
 	push_cube();
 	
+	Serial.println("rotate_three to rotate_two");
 	rotate_three();
 	hold_cube();
 	rotate_two();
@@ -3298,14 +3294,17 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
-	//import_cube_colors();
+	rotation_test();
+	while(true){}
+	/*import_cube_colors();
 
 	//superflip();
 	//single_run();
-	rotation_test();
+	auto_test();
+	//rotation_test();
 	Serial.println("Done!");
 
-	while(true){}
+	while(true){}*/
 	/*
 	//rotation_test();
 	//cube_legality_check();
@@ -3314,5 +3313,5 @@ void loop()
 	//single_run();
 	delay(10000000);
 	*/
-	
+
 };

@@ -7,19 +7,14 @@ to their equivalent
 in the arduino
 
 
-Run here: $ cd Dropbox/'Cube Solver'/Code/Serial_Comm/Bulk_Parse
-		  $ python Serial_Parse.py
+Run here: $ cd Dropbox/'Cube Solver'/Project
+		  $ python Send_Cube_State.py
 """
 from Tkinter import *
 import serial
 import time
 #ser = serial.Serial('/dev/ttyACM0', 9600)
-ser = serial.Serial('/dev/ttyACM3', 9600) 
-
-def reset_arduino():
-	ser.setDTR(False) # Drop DTR
-	time.sleep(0.022) # similar to ide
-	ser.setDTR(True)  # Up the DTR back
+ser = serial.Serial('/dev/ttyACM1', 9600) 
 
 yellow_face = ['y', 'y', 'y',
                'y', 'y', 'y',
@@ -44,6 +39,12 @@ green_face = ['g', 'g', 'g',
 orange_face = ['o', 'o', 'o',
                'o', 'o', 'o',
                'o', 'o', 'o']
+
+def reset_arduino():
+    ser.setDTR(False) # Drop DTR
+    time.sleep(0.022) # similar to ide
+    ser.setDTR(True)  # Up the DTR back
+
 
 raw_cube_string = ""
 
@@ -522,7 +523,7 @@ def enter_orange_face():
             self.ss = Button(root, command=human_move, bg='orange', activebackground='orange', width=10, height=5)
             self.ss.grid(row=self.row, column=self.col) 
             
-            next_face = Button(root, text="Done",  command=root.destroy)
+            next_face = Button(root, text="Send Cube!",  command=root.destroy)
             next_face.grid(row=4, column=1) 
 
     bb = range(9)
