@@ -16,7 +16,7 @@ Servo rotate_servo;
 Servo push_servo;
 
 int move_speed = 5;
-int buffer_time = 100; // time between moves
+int buffer_time = 75; // time between moves
 int rotate_pos = 90;
 int push_pos = 140;
 int hold_progress = 3;
@@ -258,19 +258,19 @@ void rotate_one()
 		move_servo(rotate_pos, 83, 9);
 		move_servo(rotate_pos, 90, 9); // prevent pulling
 		release_cube();
-		move_servo(rotate_pos, 5, 9);
+		move_servo(rotate_pos, rotate_finish, 9);
 		hold_progress = 2;
 	}
 	else if (hold_progress == 2) // hold progress 2 = release, but offset still there
 	{
 		hold_progress = 3;
+		move_servo(rotate_pos, rotate_finish, 9);
 	}
 	else if (hold_progress == 3) // hold progress 3 = release, offsets reconciled
 	{
 		// do nothing
+		move_servo(rotate_pos, rotate_finish, 9);
 	}
-
-	move_servo(rotate_pos, rotate_finish, 9);
 }
 void rotate_two()
 {
@@ -281,12 +281,12 @@ void rotate_two()
 		if (rotate_pos < 50) 
 		{
 			move_servo(rotate_pos, rotate_finish+19, 9);
-			move_servo(rotate_pos, rotate_finish, 9);
+			move_servo(rotate_pos, rotate_finish+5, 9);
 		}
 		// rotate from rotate_three
 		else if (rotate_pos > 150) 
 		{
-			move_servo(rotate_pos, rotate_finish-12, 9);
+			move_servo(rotate_pos, rotate_finish-11, 9);
 			move_servo(rotate_pos, rotate_finish, 9);
 		}
 		hold_progress = 2;
@@ -314,10 +314,10 @@ void rotate_three()
 		release_cube();
 		move_servo(rotate_pos, 80, 9);
 		hold_cube();
-		move_servo(rotate_pos, 102, 9);
+		move_servo(rotate_pos, 101, 9);
 		move_servo(rotate_pos, 90, 9); // prevent pulling
 		release_cube();
-		move_servo(rotate_pos, 175, 9);
+		move_servo(rotate_pos, rotate_finish, 9);
 		hold_progress = 2;
 	}
 	else if (hold_progress == 2) // hold progress 2 = release, but offset still there
@@ -3241,37 +3241,54 @@ void single_run()
 }
 
 // test all possible rotation combinations (for mechanical testing)
-void rotation_test()
+void rotate_one_to_two()
 {
-	Serial.println("Rotation Test:");
-
 	Serial.println("rotate_one to rotate_two");
 	rotate_one();
 	hold_cube();
 	rotate_two();
 	release_cube();
 	push_cube();
+}
 
+void rotate_two_to_one()
+{
 	Serial.println("rotate_two to rotate_one");
 	rotate_two();
 	hold_cube();
 	rotate_one();
 	release_cube();
 	push_cube();
+}
 
+void rotate_two_to_three()
+{
 	Serial.println("rotate_two to rotate_three");
 	rotate_two();
 	hold_cube();
 	rotate_three();
 	release_cube();
 	push_cube();
-	
+}
+
+void rotate_three_to_two()
+{
 	Serial.println("rotate_three to rotate_two");
 	rotate_three();
 	hold_cube();
 	rotate_two();
 	release_cube();
 	push_cube();
+}
+
+void rotation_test()
+{
+	Serial.println("Rotation Test:");
+
+	rotate_one_to_two();
+	rotate_two_to_one();
+	rotate_two_to_three();
+	rotate_three_to_two();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3282,8 +3299,8 @@ void setup()
 {
 	rotate_servo.attach(9);  // attaches the servo on pin 9 to the servo object
 	push_servo.attach(6);  // attaches the servo on pin 6 to the servo object
-	rotate_servo.write(rotate_pos);
 	push_servo.write(push_pos);
+	rotate_servo.write(rotate_pos);
 	delay(1000);
 	Serial.begin(9600);
 	while (! Serial); // Wait untilSerial is ready
@@ -3294,17 +3311,11 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
-	rotation_test();
-	while(true){}
-	/*import_cube_colors();
-
-	//superflip();
-	//single_run();
-	auto_test();
-	//rotation_test();
+	
+	import_cube_colors();
+	single_run();
 	Serial.println("Done!");
-
-	while(true){}*/
+	while(true){}
 	/*
 	//rotation_test();
 	//cube_legality_check();
