@@ -1576,7 +1576,7 @@ void fix_cross_instance_1() // bad pieces up and right
 	Serial.print("	Fix Cross Instance 1: ");
 
 	// only does the sim movements because we aren't using the moves in the function, since they are inefficient (due to higher abstraction)
-	sim_only = true;
+	//sim_only = true;
 	right();
 	right();
 	back();
@@ -1585,11 +1585,11 @@ void fix_cross_instance_1() // bad pieces up and right
 	back_inverted();
 	right();
 	right();
-	sim_only = false;	// bring it back, to avoid problems when using it in the future.
+	//sim_only = false;	// bring it back, to avoid problems when using it in the future.
 
 	// The actual, "lower level" movements:
 	// R
-	rotate_one();
+	/*rotate_one();
 	push_cube();
 	rotate_two();
 	hold_cube();
@@ -1652,7 +1652,7 @@ void fix_cross_instance_1() // bad pieces up and right
 	rotate_two();
 	hold_cube();
 	rotate_one();
-	release_cube();
+	release_cube();*/
 
 
 
@@ -3228,9 +3228,9 @@ void auto_test()
 	Serial.print(num_of_tests_ran);
 }
 
-void single_run()
+void solve_cube()
 {
-	Serial.println("Single Run: ");
+	Serial.println("Solving Cube: ");
 	print_whole_cube();
 	solve_stage = 1;
 	// solve the cube
@@ -3313,16 +3313,8 @@ void loop()
 {
 	
 	import_cube_colors();
-	single_run();
+	solve_cube();
 	Serial.println("Done!");
 	while(true){}
-	/*
-	//rotation_test();
-	//cube_legality_check();
-	//print_cube(white_side);
-	auto_test();
-	//single_run();
-	delay(10000000);
-	*/
 
 };
