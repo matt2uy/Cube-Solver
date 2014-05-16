@@ -1,9 +1,6 @@
-# This is my README
-Github:
+Github: https://github.com/matt2uy/Cube-Solver
 
 An Arduino robot that solves a rubiks cube.
-
-Cube_Solver
 
 How to use:
 1. Flash Cube_Solver.cpp to Arduino
@@ -11,7 +8,7 @@ How to use:
 
 Dependencies:
 - pyserial
-- arduino ide/codebender...etc...
+- arduino ide...etc...
 - python 2.7 or later
 - tkinter
 
