@@ -1603,9 +1603,7 @@ void fix_cross_instance_1() // bad pieces up and right
 
 	// B
 	rotate_two();
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 	hold_cube();
 	rotate_one();
 	release_cube();
@@ -1636,9 +1634,7 @@ void fix_cross_instance_1() // bad pieces up and right
 	// R
 	//green
 	rotate_two();
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 	hold_cube();
 	rotate_one();
 	release_cube();
@@ -1651,12 +1647,9 @@ void fix_cross_instance_1() // bad pieces up and right
 
 	// return to original orientation y, g ontop
 	rotate_two();
-	push_cube();
-	push_cube();
+	push_cube(2);
 	rotate_three();
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 	rotate_two();
 
 	// cube simulation
@@ -3534,7 +3527,7 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
-	push_cube(3);
+	fix_cross_instance_1();
 	//import_cube_colors();
 	//solve_cube();
 	Serial.println("Done!");
