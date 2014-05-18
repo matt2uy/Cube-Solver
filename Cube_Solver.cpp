@@ -8,6 +8,12 @@
 // pictures: <URL>
 // files and instructables: <URL>
 
+// there are 4 layers of movement function:
+// 1. servo movement - how many degrees to move each servo
+// 2. servo actions - ex. pushing the cube, or rotating it
+// 3. cube moves - also known as cube notation; combinations of servo actions to orient the cube, then turn it, then orient it back
+// 4. cube algorithms - combinations of cube moves that perform a desired action to the cube
+
 #include <Servo.h>
 //#include <Solver.h>
 
@@ -227,12 +233,17 @@ int move_servo(int start, int finish, int servo_pin)
 	delay(buffer_time);
 }
 ///////// Cube movement functions: ////////////
-void push_cube()
+void push_cube(int num_of_pushes = 1)
 {
-	move_servo(140, 72, 6);
-	delay(buffer_time);
-	move_servo(72, 140, 6);
-	delay(buffer_time);
+	while (num_of_pushes != 0)
+	{
+		move_servo(push_pos, 72, 6);
+		delay(buffer_time);
+		move_servo(push_pos, 115, 6);
+		delay(buffer_time);
+		num_of_pushes--;
+	}
+	release_cube();
 }
 void hold_cube()
 {
@@ -280,7 +291,7 @@ void rotate_two()
 		// rotate from rotate_one
 		if (rotate_pos < 50) 
 		{
-			move_servo(rotate_pos, rotate_finish+19, 9);
+			move_servo(rotate_pos, rotate_finish+23, 9);
 			move_servo(rotate_pos, rotate_finish+5, 9);
 		}
 		// rotate from rotate_three
@@ -1575,21 +1586,9 @@ void fix_cross_instance_1() // bad pieces up and right
 	Serial.println();
 	Serial.print("	Fix Cross Instance 1: ");
 
-	// only does the sim movements because we aren't using the moves in the function, since they are inefficient (due to higher abstraction)
-	//sim_only = true;
-	right();
-	right();
-	back();
-	up();
-	up();
-	back_inverted();
-	right();
-	right();
-	//sim_only = false;	// bring it back, to avoid problems when using it in the future.
-
-	// The actual, "lower level" movements:
+	// servo actions
 	// R
-	/*rotate_one();
+	rotate_one();
 	push_cube();
 	rotate_two();
 	hold_cube();
@@ -1614,8 +1613,6 @@ void fix_cross_instance_1() // bad pieces up and right
 	// U
 	rotate_two();
 	push_cube();
-	push_cube();
-	push_cube();
 	hold_cube();
 	rotate_one();
 	release_cube();
@@ -1631,8 +1628,6 @@ void fix_cross_instance_1() // bad pieces up and right
 	// B'
 	//white
 	rotate_two();
-	push_cube();
-	push_cube();
 	push_cube();
 	hold_cube();
 	rotate_three();
@@ -1652,16 +1647,116 @@ void fix_cross_instance_1() // bad pieces up and right
 	rotate_two();
 	hold_cube();
 	rotate_one();
-	release_cube();*/
+	release_cube();
 
+	// return to original orientation y, g ontop
+	rotate_two();
+	push_cube();
+	push_cube();
+	rotate_three();
+	push_cube();
+	push_cube();
+	push_cube();
+	rotate_two();
 
-
-
+	// cube simulation
+	sim_only = true;
+	right();
+	right();
+	back();
+	up();
+	up();
+	back_inverted();
+	right();
+	right();
+	sim_only = false;
 }
 void fix_cross_instance_2() // bad pieces up and down
 {
 	Serial.println();
 	Serial.print("	Fix Cross Instance 2: ");
+
+	// servo actions
+	// up
+	push_cube();
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+
+	// up
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+
+	// back
+	rotate_two();
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+
+	// back
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+
+	// down
+	rotate_two();
+	push_cube();
+	push_cube();
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+
+
+	// down
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	// back
+
+	rotate_two();
+	push_cube();
+	push_cube();
+	push_cube();
+
+	hold_cube();
+	rotate_one();
+	release_cube();
+
+	// back
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	// up
+
+	rotate_two();
+	push_cube();
+
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	// up
+
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+
+	// return to original orientation
+	push_cube();
+	push_cube();
+	rotate_two();
+
+	// cube simulation
+	sim_only = true;
 	up();
 	up();
 	back();
@@ -1672,35 +1767,161 @@ void fix_cross_instance_2() // bad pieces up and down
 	back();
 	up();
 	up();
+	sim_only = false;
 }
 void fix_corners_instance_1() // top left
 {
 	Serial.println();
 	Serial.print("	Fix Corners Instance 1: ");
+	
+	// servo actions	
+
+	// up
+	push_cube();
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+
+	//back
+	push_cube();
+	push_cube();
+	push_cube();
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+
+	//up inverted
+	rotate_two();
+	push_cube();
+	push_cube();
+	push_cube();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	// currently yellow front, green top
+
+	// return to original orientation
+	rotate_two();
+	push_cube();
+	rotate_one();
+	push_cube();
+	rotate_two();
+	push_cube();
+
+	// cube simulation
+	sim_only = true;
 	up();
 	back();
 	up_inverted();
+	sim_only = false;
 }
 void fix_corners_instance_2() // top right
 {
 	Serial.println();
 	Serial.print("	Fix Corners Instance 2: ");
+
+	// servo actions	
+
+	// up_inverted
+	push_cube();
+	push_cube();
+	hold_cube();
+	rotate_three();
+	release_cube();
+
+	//back_inverted
+	push_cube();
+	push_cube();
+	push_cube();
+	rotate_two();
+	hold_cube();
+	rotate_three();
+	release_cube();
+
+	//up
+	rotate_two();
+	push_cube();
+	push_cube();
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	// currently yellow front, green top
+
+	// return to original orientation
+	rotate_two();
+	push_cube();
+	rotate_three();
+	push_cube();
+	rotate_two();
+	push_cube();
+
+	// cube simulation
+	sim_only = true;
 	up_inverted();
 	back_inverted();
 	up();
+	sim_only = false;
 }
 void fix_corners_instance_3()
 {
 	Serial.println();
 	Serial.print("	Fix Corners Instance 3 (bring yellow piece up): ");
+
+	// servo actions	
+
+	// left_inverted
+	rotate_one();
+	push_cube();
+	push_cube();
+	push_cube();
+	hold_cube();
+	rotate_two();
+	release_cube();
+
+	//back
+	rotate_three();
+	push_cube();
+	hold_cube();
+	rotate_two();
+	release_cube();
+
+	//left
+	push_cube();
+	push_cube();
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	// currently yellow front, red top
+
+	// return to original orientation
+	
+	rotate_three();
+	push_cube();
+	push_cube();
+	push_cube();
+	rotate_two();
+
+	push_cube();
+	push_cube();
+	push_cube();
+
+	// cube simulation
+	sim_only = true;
 	left_inverted();
 	back();
 	left();
+	sim_only = false;
 }
 void add_edges_instance_1() // 2 left
 {
 	Serial.println();
 	Serial.print("	Add Edges Instance 1: ");
+
+
 	back_inverted();
 	left_inverted();
 	back();
@@ -1709,6 +1930,8 @@ void add_edges_instance_1() // 2 left
 	up();
 	back_inverted();
 	up_inverted();
+
+
 }
 void add_edges_instance_2() // 2 right
 {
@@ -3311,9 +3534,9 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
-	
-	import_cube_colors();
-	solve_cube();
+	push_cube(3);
+	//import_cube_colors();
+	//solve_cube();
 	Serial.println("Done!");
 	while(true){}
 

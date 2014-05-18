@@ -14,7 +14,7 @@ from Tkinter import *
 import serial
 import time
 #ser = serial.Serial('/dev/ttyACM0', 9600)
-ser = serial.Serial('/dev/ttyACM5', 9600) 
+ser = serial.Serial('/dev/ttyACM4', 9600) 
 
 yellow_face = ['y', 'y', 'y',
                'y', 'y', 'y',
