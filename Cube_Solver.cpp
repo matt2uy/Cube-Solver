@@ -238,9 +238,9 @@ void push_cube(int num_of_pushes = 1)
 	while (num_of_pushes != 0)
 	{
 		move_servo(push_pos, 72, 6);
-		delay(buffer_time);
+		delay(buffer_time+50);
 		move_servo(push_pos, 115, 6);
-		delay(buffer_time);
+		delay(buffer_time-50);
 		num_of_pushes--;
 	}
 	release_cube();
@@ -297,7 +297,7 @@ void rotate_two()
 		// rotate from rotate_three
 		else if (rotate_pos > 150) 
 		{
-			move_servo(rotate_pos, rotate_finish-11, 9);
+			move_servo(rotate_pos, rotate_finish-15, 9);
 			move_servo(rotate_pos, rotate_finish, 9);
 		}
 		hold_progress = 2;
@@ -360,9 +360,7 @@ void left()
 		rotate_one();
 		push_cube();
 		rotate_two();
-		push_cube();
-		push_cube();
-		push_cube();
+		push_cube(3);
 	}
 
 	// Cube simulation
@@ -578,9 +576,7 @@ void right_inverted()
 		rotate_three();
 		push_cube();
 		rotate_two();
-		push_cube();
-		push_cube();
-		push_cube();
+		push_cube(3);
 	}
 
 	// Cube simulation
@@ -651,9 +647,7 @@ void down()
 		rotate_one();
 		push_cube();
 		rotate_two();
-		push_cube();
-		push_cube();
-		push_cube();
+		push_cube(3);
 	}
 
 	// Cube simulation
@@ -724,9 +718,7 @@ void down_inverted()
 		rotate_three();
 		push_cube();
 		rotate_two();
-		push_cube();
-		push_cube();
-		push_cube();
+		push_cube(3);
 	}
 
 	// Cube simulation
@@ -789,8 +781,7 @@ void up()
 
 	if (sim_only == false)
 	{
-		push_cube();
-		push_cube();
+		push_cube(2);
 		hold_cube();
 		rotate_one();
 		release_cube();
@@ -862,8 +853,7 @@ void up_inverted()
 
 	if (sim_only == false)
 	{
-		push_cube();
-		push_cube();
+		push_cube(2);
 		hold_cube();
 		rotate_three();
 		release_cube();
@@ -935,9 +925,7 @@ void front()
 
 	if (sim_only == false)
 	{
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 	hold_cube();
 	rotate_one();
 	release_cube();
@@ -1009,9 +997,7 @@ void front_inverted()
 
 	if (sim_only == false)
 	{
-		push_cube();
-		push_cube();
-		push_cube();
+		push_cube(3);
 		hold_cube();
 		rotate_three();
 		release_cube();
@@ -1086,9 +1072,7 @@ void back()
 		rotate_one(); // ccw
 		release_cube();
 		rotate_two();
-		push_cube();
-		push_cube();
-		push_cube();
+		push_cube(3);
 		rotate_three(); //cw
 		push_cube();
 		rotate_two();
@@ -1159,9 +1143,7 @@ void back_inverted()
 		rotate_three();
 		release_cube();
 		rotate_two();
-		push_cube();
-		push_cube();
-		push_cube();
+		push_cube(3);
 		rotate_one();
 		push_cube();
 		rotate_two();
@@ -1384,9 +1366,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			rotate_one();
 			push_cube();
 			rotate_two();
-			push_cube();
-			push_cube();
-			push_cube();
+			push_cube(3);
 
 
 			for(int i = 0; i < 9; i++)
@@ -1483,9 +1463,7 @@ void flip_cube(char cube_rotation)	// flips the cube on the F or U axis
 			rotate_three();
 			push_cube();
 			rotate_two();
-			push_cube();
-			push_cube();
-			push_cube();
+			push_cube(3);
 
 			for(int i = 0; i < 9; i++)
 			{
@@ -1671,8 +1649,7 @@ void fix_cross_instance_2() // bad pieces up and down
 
 	// servo actions
 	// up
-	push_cube();
-	push_cube();
+	push_cube(2);
 	hold_cube();
 	rotate_one();
 	release_cube();
@@ -1698,9 +1675,7 @@ void fix_cross_instance_2() // bad pieces up and down
 
 	// down
 	rotate_two();
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 	hold_cube();
 	rotate_one();
 	release_cube();
@@ -1714,9 +1689,7 @@ void fix_cross_instance_2() // bad pieces up and down
 	// back
 
 	rotate_two();
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 
 	hold_cube();
 	rotate_one();
@@ -1744,8 +1717,7 @@ void fix_cross_instance_2() // bad pieces up and down
 	release_cube();
 
 	// return to original orientation
-	push_cube();
-	push_cube();
+	push_cube(2);
 	rotate_two();
 
 	// cube simulation
@@ -1770,16 +1742,13 @@ void fix_corners_instance_1() // top left
 	// servo actions	
 
 	// up
-	push_cube();
-	push_cube();
+	push_cube(2);
 	hold_cube();
 	rotate_one();
 	release_cube();
 
 	//back
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 	rotate_two();
 	hold_cube();
 	rotate_one();
@@ -1787,9 +1756,7 @@ void fix_corners_instance_1() // top left
 
 	//up inverted
 	rotate_two();
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 	hold_cube();
 	rotate_three();
 	release_cube();
@@ -1818,16 +1785,13 @@ void fix_corners_instance_2() // top right
 	// servo actions	
 
 	// up_inverted
-	push_cube();
-	push_cube();
+	push_cube(2);
 	hold_cube();
 	rotate_three();
 	release_cube();
 
 	//back_inverted
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 	rotate_two();
 	hold_cube();
 	rotate_three();
@@ -1835,9 +1799,7 @@ void fix_corners_instance_2() // top right
 
 	//up
 	rotate_two();
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 	hold_cube();
 	rotate_one();
 	release_cube();
@@ -1867,9 +1829,7 @@ void fix_corners_instance_3()
 
 	// left_inverted
 	rotate_one();
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 	hold_cube();
 	rotate_two();
 	release_cube();
@@ -1882,9 +1842,7 @@ void fix_corners_instance_3()
 	release_cube();
 
 	//left
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 	hold_cube();
 	rotate_one();
 	release_cube();
@@ -1893,14 +1851,10 @@ void fix_corners_instance_3()
 	// return to original orientation
 	
 	rotate_three();
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 	rotate_two();
 
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 
 	// cube simulation
 	sim_only = true;
@@ -1923,8 +1877,6 @@ void add_edges_instance_1() // 2 left
 	up();
 	back_inverted();
 	up_inverted();
-
-
 }
 void add_edges_instance_2() // 2 right
 {
@@ -2029,6 +1981,7 @@ void cw_rotation() // can also be used for 4 bad edges
 {
 	Serial.println();
 	Serial.print("	CW Rotation: ");
+	// same as finish_white_face_instance_1()
 	right();
 	back();
 	right_inverted();
@@ -2037,7 +1990,10 @@ void cw_rotation() // can also be used for 4 bad edges
 	back();
 	back();
 	right_inverted();
+
 	flip_cube('f');// rotate cube: right side = front side
+
+	// same as finish_white_face_instance_1()
 	left_inverted();
 	back_inverted();
 	left();
@@ -2046,12 +2002,14 @@ void cw_rotation() // can also be used for 4 bad edges
 	back_inverted();
 	back_inverted();
 	left();
+
 	flip_cube('F');// rotate cube back to original state: left side = front side
 }
 void ccw_rotation()
 {
 	Serial.println();
 	Serial.print("	CCW Rotation: ");
+	// same as finish_white_face_instance_2()
 	left_inverted();
 	back_inverted();
 	left();
@@ -2060,7 +2018,10 @@ void ccw_rotation()
 	back_inverted();
 	back_inverted();
 	left();
+
 	flip_cube('F');// rotate cube: left side = front side
+	
+	// same as finish_white_face_instance_1()
 	right();
 	back();
 	right_inverted();
@@ -2069,6 +2030,7 @@ void ccw_rotation()
 	back();
 	back();
 	right_inverted();
+
 	flip_cube('f');
 }
 // miscellaneous algorithms
@@ -2086,9 +2048,7 @@ void warm_up() // do it six times to get back to the original position
 	rotate_three();
 	push_cube();
 	rotate_two();
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 
 	//d'
 
@@ -2116,9 +2076,7 @@ void warm_up() // do it six times to get back to the original position
 	rotate_one();
 	push_cube();
 	rotate_two();
-	push_cube();
-	push_cube();
-	push_cube();
+	push_cube(3);
 }
 void superflip() // all edges are opposite (checkered pattern)
 {
@@ -2193,7 +2151,56 @@ void scramble() // random 25 moves
 	}
 }
 
+// test all possible rotation combinations (for mechanical testing)
+void rotate_one_to_two()
+{
+	Serial.println("rotate_one to rotate_two");
+	rotate_one();
+	hold_cube();
+	rotate_two();
+	release_cube();
+	push_cube();
+}
 
+void rotate_two_to_one()
+{
+	Serial.println("rotate_two to rotate_one");
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	push_cube();
+}
+
+void rotate_two_to_three()
+{
+	Serial.println("rotate_two to rotate_three");
+	rotate_two();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	push_cube();
+}
+
+void rotate_three_to_two()
+{
+	Serial.println("rotate_three to rotate_two");
+	rotate_three();
+	hold_cube();
+	rotate_two();
+	release_cube();
+	push_cube();
+}
+
+void rotation_test()
+{
+	Serial.println("Rotation Test:");
+
+	rotate_one_to_two();
+	rotate_two_to_one();
+	rotate_two_to_three();
+	rotate_three_to_two();
+}
 
 //////////////////////////////// cube_decide functions, used to determine what algorithms and moves to execute ///////////////////////
 // cube_decide variables:
@@ -3454,57 +3461,6 @@ void solve_cube()
 	{
 		cube_decide();
 	}
-}
-
-// test all possible rotation combinations (for mechanical testing)
-void rotate_one_to_two()
-{
-	Serial.println("rotate_one to rotate_two");
-	rotate_one();
-	hold_cube();
-	rotate_two();
-	release_cube();
-	push_cube();
-}
-
-void rotate_two_to_one()
-{
-	Serial.println("rotate_two to rotate_one");
-	rotate_two();
-	hold_cube();
-	rotate_one();
-	release_cube();
-	push_cube();
-}
-
-void rotate_two_to_three()
-{
-	Serial.println("rotate_two to rotate_three");
-	rotate_two();
-	hold_cube();
-	rotate_three();
-	release_cube();
-	push_cube();
-}
-
-void rotate_three_to_two()
-{
-	Serial.println("rotate_three to rotate_two");
-	rotate_three();
-	hold_cube();
-	rotate_two();
-	release_cube();
-	push_cube();
-}
-
-void rotation_test()
-{
-	Serial.println("Rotation Test:");
-
-	rotate_one_to_two();
-	rotate_two_to_one();
-	rotate_two_to_three();
-	rotate_three_to_two();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
