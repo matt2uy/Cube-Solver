@@ -233,15 +233,33 @@ int move_servo(int start, int finish, int servo_pin)
 	delay(buffer_time);
 }
 ///////// Cube movement functions: ////////////
-void push_cube(int num_of_pushes = 1)
+void push_cube(int num_of_pushes = 1, bool slow_push = false)
 {
-	while (num_of_pushes != 0)
+	if (num_of_pushes = 1)
 	{
 		move_servo(push_pos, 72, 6);
-		delay(buffer_time+50);
-		move_servo(push_pos, 115, 6);
-		delay(buffer_time-50);
-		num_of_pushes--;
+		delay(buffer_time);
+		release_cube();
+		delay(buffer_time);
+	}
+	while (num_of_pushes != 0)
+	{
+		if (slow_push == false)
+		{
+			move_servo(push_pos, 72, 6);
+			delay(buffer_time+50);
+			move_servo(push_pos, 120, 6);
+			delay(buffer_time);
+			num_of_pushes--;
+		}
+		else
+		{
+			move_servo(push_pos, 72, 6);
+			delay(buffer_time+100);
+			move_servo(push_pos, 120, 6);
+			delay(buffer_time+50);
+			num_of_pushes--;
+		}	
 	}
 	release_cube();
 }
@@ -1868,7 +1886,59 @@ void add_edges_instance_1() // 2 left
 	Serial.println();
 	Serial.print("	Add Edges Instance 1: ");
 
+	// servo actions	
 
+	//back_inverted();
+	push_cube();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//left_inverted();
+	rotate_two();
+	push_cube(3);
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//back();
+	push_cube();
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//left();
+	push_cube(3);
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//back();
+	push_cube();
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//up();
+	push_cube();
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//back_inverted();
+	rotate_two();
+	push_cube();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//up_inverted();
+	push_cube(3);
+	rotate_one();
+	hold_cube();
+	rotate_two();
+	release_cube();
+
+	// return to original orientation
+	push_cube(2);
+
+	// cube simulation
+	sim_only = true;
 	back_inverted();
 	left_inverted();
 	back();
@@ -1877,11 +1947,66 @@ void add_edges_instance_1() // 2 left
 	up();
 	back_inverted();
 	up_inverted();
+	sim_only = false;
 }
 void add_edges_instance_2() // 2 right
 {
 	Serial.println();
 	Serial.print("	Add edges Instance 2: ");
+
+	// servo actions	
+
+	//back();
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//right();
+	rotate_two();
+	push_cube(3);
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//back_inverted();
+	push_cube();
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//right_inverted();
+	push_cube(3);
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//back_inverted();
+	push_cube();
+	rotate_two();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//up_inverted();
+	push_cube();
+	rotate_two();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//back();
+	rotate_two();
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//up();
+	push_cube(3);
+	rotate_three();
+	hold_cube();
+	rotate_two();
+	release_cube();
+
+	// return to original orientation
+	push_cube(2);
+
+	// cube simulation
+	sim_only = true;
 	back();
 	right();
 	back_inverted();
@@ -1890,11 +2015,67 @@ void add_edges_instance_2() // 2 right
 	up_inverted();
 	back();
 	up();
+	sim_only = false;
 }
 void add_edges_instance_3()
 {
 	Serial.println();
 	Serial.print("	Add edges Instance 3: " );
+
+	// servo actions	
+
+	//back_inverted();
+	push_cube();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//up_inverted();
+	push_cube();
+	rotate_one();
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//back();
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//up();
+	push_cube(3);
+	rotate_three();
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//back();
+	push_cube(3);
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//right();
+	rotate_two();
+	push_cube(3);
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//back_inverted();
+	push_cube();
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//right_inverted();
+	push_cube(3);
+	rotate_one();
+	hold_cube();
+	rotate_two();
+	release_cube();
+	// return to original orientation
+	rotate_three();
+	push_cube();
+	rotate_two();
+	push_cube(3);
+
+	// cube simulation
+	sim_only = true;
 	back_inverted();
 	up_inverted();
 	back();
@@ -1903,22 +2084,127 @@ void add_edges_instance_3()
 	right();
 	back_inverted();
 	right_inverted();
+	sim_only = false;
 }
 void white_cross_on_top()
 {
 	Serial.println();
 	Serial.print("	White Cross On Top: ");
+	// servo actions	
+
+	//right_inverted(); r
+	rotate_one();
+	push_cube();
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//back_inverted(); w
+	rotate_one();
+	push_cube(3);
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//up_inverted(); g
+	rotate_three();
+	push_cube();
+	rotate_two();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//back(); w
+	rotate_two();
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//up();g
+	push_cube(3);
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//right(); r
+	push_cube();
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	// return to original orientation
+	rotate_two();
+	push_cube();
+	rotate_three();
+	push_cube();
+	rotate_two();
+	push_cube(3);
+	rotate_three();
+	push_cube();
+	rotate_two();
+
+
+	// cube simulation
+	sim_only = true;
 	right_inverted();
 	back_inverted();
 	up_inverted();
 	back();
 	up();
 	right();
+	sim_only = false;
 }
 void finish_white_face_instance_1()
 {
 	Serial.println();
 	Serial.print("	Finish White Face Instance 1: ");
+	
+	// servo actions	
+
+	//right();
+	rotate_one();
+	push_cube();
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//back();
+	push_cube();
+	rotate_two();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//right_inverted();
+	rotate_two();
+	push_cube();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//back();
+	push_cube(3);
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//right();
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//back() + back();
+	push_cube(3);
+	rotate_three();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//right_inverted();
+	push_cube(3);
+	hold_cube();
+	rotate_two();
+	release_cube();
+	// return to original orientation
+	rotate_three();
+	push_cube();
+	rotate_two();
+
+	// cube simulation
+	sim_only = true;
 	right();
 	back();
 	right_inverted();
@@ -1927,11 +2213,61 @@ void finish_white_face_instance_1()
 	back();
 	back();
 	right_inverted();
+	sim_only = false;
 }
 void finish_white_face_instance_2()
 {
 	Serial.println();
 	Serial.print("	Finish White Face Instance 2: ");
+	// servo actions	
+
+	//left_inverted();
+	rotate_three();
+	push_cube();
+	rotate_two();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//back_inverted();
+	push_cube();
+	rotate_two();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//left();
+	rotate_two();
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//back_inverted();
+	push_cube(3);
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//left_inverted();
+	push_cube();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//back_inverted() + back_inverted();
+	push_cube(3);
+	rotate_one();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//left();
+	push_cube(3);
+	hold_cube();
+	rotate_two();
+	release_cube();
+	// return to original orientation
+	rotate_one();
+	push_cube();
+	rotate_two();
+
+	// cube simulation
+	sim_only = true;
 	left_inverted();
 	back_inverted();
 	left();
@@ -1940,12 +2276,75 @@ void finish_white_face_instance_2()
 	back_inverted();
 	back_inverted();
 	left();
+	sim_only = false;
 }
 // insert top layer corners
 void green_on_right()
 {
 	Serial.println();
 	Serial.print("	Green On Right: ");
+
+	// servo actions	
+
+	// green top. yellow front
+
+	//right_inverted();r
+	rotate_one();
+	push_cube();
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//up();g
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//right_inverted();r
+	push_cube(3, true);
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//down() + down();b
+	push_cube(3);
+	rotate_three();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//right();r
+	rotate_two();
+	push_cube(3);
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//up_inverted();g
+	push_cube(3, true);
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//right_inverted();r
+	push_cube();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//down(); + down();b
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//right(); + right();r
+	push_cube(3, true);
+	rotate_three();
+	hold_cube();
+	rotate_one();
+	release_cube();
+
+	// return to original orientation
+	push_cube(3, true);
+	rotate_two();
+	
+
+	// cube simulation
+	sim_only = true;
 	right_inverted();
 	up();
 	right_inverted();
@@ -1958,11 +2357,75 @@ void green_on_right()
 	down();
 	right();
 	right();
+	sim_only = false;
 }
+
 void green_on_left()
 {
 	Serial.println();
 	Serial.print("	Green On Left: ");
+
+		// servo actions	
+
+	// green top. yellow front
+
+	//left();o
+	rotate_three();
+	push_cube();
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//up_inverted();g
+	push_cube();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//left();o
+	push_cube(3);
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//down_inverted() + down_inverted();b
+	push_cube(3);
+	rotate_three();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//left_inverted();o
+	rotate_two();
+	push_cube(3);
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//up();g
+	push_cube(3);
+	hold_cube();
+	rotate_two();
+	release_cube();
+	//left();o
+	push_cube();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	//down_inverted(); + down_inverted();b
+	push_cube();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	//left_inverted(); + left_inverted();o
+	push_cube(3);
+	rotate_one();
+	hold_cube();
+	rotate_three();
+	release_cube();
+
+	// return to original orientation
+	push_cube(3, true);
+	rotate_two();
+	
+
+	// cube simulation
+	sim_only = true;
 	left();
 	up_inverted();
 	left();
@@ -1975,62 +2438,25 @@ void green_on_left()
 	down_inverted();
 	left_inverted();
 	left_inverted();
+	sim_only = false;
 }
 // insert top layer edges
 void cw_rotation() // can also be used for 4 bad edges
 {
 	Serial.println();
 	Serial.print("	CW Rotation: ");
-	// same as finish_white_face_instance_1()
-	right();
-	back();
-	right_inverted();
-	back();
-	right();
-	back();
-	back();
-	right_inverted();
-
+	finish_white_face_instance_1();
 	flip_cube('f');// rotate cube: right side = front side
-
-	// same as finish_white_face_instance_1()
-	left_inverted();
-	back_inverted();
-	left();
-	back_inverted();
-	left_inverted();
-	back_inverted();
-	back_inverted();
-	left();
-
+	finish_white_face_instance_2();
 	flip_cube('F');// rotate cube back to original state: left side = front side
 }
 void ccw_rotation()
 {
 	Serial.println();
 	Serial.print("	CCW Rotation: ");
-	// same as finish_white_face_instance_2()
-	left_inverted();
-	back_inverted();
-	left();
-	back_inverted();
-	left_inverted();
-	back_inverted();
-	back_inverted();
-	left();
-
+	finish_white_face_instance_2();
 	flip_cube('F');// rotate cube: left side = front side
-	
-	// same as finish_white_face_instance_1()
-	right();
-	back();
-	right_inverted();
-	back();
-	right();
-	back();
-	back();
-	right_inverted();
-
+	finish_white_face_instance_1();
 	flip_cube('f');
 }
 // miscellaneous algorithms
@@ -3483,9 +3909,8 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
-	fix_cross_instance_1();
-	//import_cube_colors();
-	//solve_cube();
+	import_cube_colors();
+	solve_cube();
 	Serial.println("Done!");
 	while(true){}
 
