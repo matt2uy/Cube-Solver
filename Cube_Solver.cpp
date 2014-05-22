@@ -281,15 +281,15 @@ void rotate_one()
 	int rotate_finish = 11;
 	if (hold_progress == 1) // hold progress 1 = hold
 	{
-		// initail turn
+		// initial turn
 		move_servo(rotate_pos, rotate_finish-11, 9);
-		move_servo(rotate_pos, rotate_finish, 9);
+		move_servo(rotate_pos, rotate_finish+10, 9);
 		// release and turn some more
 		release_cube();
 		move_servo(rotate_pos, 100, 9);
 		hold_cube();
 		move_servo(rotate_pos, 83, 9);
-		move_servo(rotate_pos, 90, 9); // prevent pulling
+		move_servo(rotate_pos, 93, 9); // prevent pulling
 		release_cube();
 		move_servo(rotate_pos, rotate_finish, 9);
 		hold_progress = 2;
@@ -341,7 +341,7 @@ void rotate_three()
 	if (hold_progress == 1) // hold progress 1 = hold
 	{
 		move_servo(rotate_pos, rotate_finish+5, 9);
-		move_servo(rotate_pos, rotate_finish-10, 9); // prevent pulling
+		move_servo(rotate_pos, rotate_finish-20, 9); // prevent pulling
 
 		// fix: cube not fully turned
 		release_cube();
@@ -1587,16 +1587,10 @@ void fix_cross_instance_1() // bad pieces up and right
 	Serial.print("	Fix Cross Instance 1: ");
 
 	// servo actions
-	// R
+	// R + // R
 	rotate_one();
 	push_cube();
-	rotate_two();
-	hold_cube();
-	rotate_one();
-	release_cube();
-
-	// R
-	rotate_two();
+	rotate_three();
 	hold_cube();
 	rotate_one();
 	release_cube();
@@ -1608,20 +1602,13 @@ void fix_cross_instance_1() // bad pieces up and right
 	rotate_one();
 	release_cube();
 
-	// U
+	// U + //U
 	rotate_two();
 	push_cube();
+	rotate_three();
 	hold_cube();
 	rotate_one();
 	release_cube();
-
-	// U
-	rotate_two();
-	hold_cube();
-	rotate_one();
-	release_cube();
-	//ornage on top
-	//green in front
 
 	// B'
 	//white
@@ -1631,19 +1618,15 @@ void fix_cross_instance_1() // bad pieces up and right
 	rotate_three();
 	release_cube();
 
-	// R
+	// R + // R
 	//green
 	rotate_two();
 	push_cube(3);
+	rotate_three();
 	hold_cube();
 	rotate_one();
 	release_cube();
 
-	// R
-	rotate_two();
-	hold_cube();
-	rotate_one();
-	release_cube();
 
 	// return to original orientation y, g ontop
 	rotate_two();
@@ -1670,70 +1653,41 @@ void fix_cross_instance_2() // bad pieces up and down
 	Serial.print("	Fix Cross Instance 2: ");
 
 	// servo actions
-	// up
+	// up + up
 	push_cube(2);
+	rotate_three();
 	hold_cube();
 	rotate_one();
 	release_cube();
 
-	// up
-	rotate_two();
-	hold_cube();
-	rotate_one();
-	release_cube();
-
-	// back
+	// back + back
 	rotate_two();
 	push_cube();
+	rotate_three();
 	hold_cube();
 	rotate_one();
 	release_cube();
 
-	// back
-	rotate_two();
-	hold_cube();
-	rotate_one();
-	release_cube();
-
-	// down
+	// down + down
 	rotate_two();
 	push_cube(3);
+	rotate_three();
 	hold_cube();
 	rotate_one();
 	release_cube();
 
-
-	// down
-	rotate_two();
-	hold_cube();
-	rotate_one();
-	release_cube();
-	// back
-
+	// back + back
 	rotate_two();
 	push_cube(3);
-
+	rotate_three();
 	hold_cube();
 	rotate_one();
 	release_cube();
 
-	// back
-	rotate_two();
-	hold_cube();
-	rotate_one();
-	release_cube();
-	// up
-
+	// up + up
 	rotate_two();
 	push_cube();
-
-	rotate_two();
-	hold_cube();
-	rotate_one();
-	release_cube();
-	// up
-
-	rotate_two();
+	rotate_three();
 	hold_cube();
 	rotate_one();
 	release_cube();
@@ -3913,8 +3867,9 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
-	import_cube_colors();
-	solve_cube();
+	//import_cube_colors();
+	//solve_cube();
+	fix_cross_instance_2();
 	Serial.println("Done!");
 	while(true){}
 
