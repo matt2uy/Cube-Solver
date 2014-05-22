@@ -235,33 +235,36 @@ int move_servo(int start, int finish, int servo_pin)
 ///////// Cube movement functions: ////////////
 void push_cube(int num_of_pushes = 1, bool slow_push = false)
 {
-	if (num_of_pushes = 1)
-	{
-		move_servo(push_pos, 72, 6);
-		delay(buffer_time);
-		release_cube();
-		delay(buffer_time);
-	}
-	while (num_of_pushes != 0)
-	{
-		if (slow_push == false)
+	if (num_of_pushes == 1)
 		{
 			move_servo(push_pos, 72, 6);
-			delay(buffer_time+50);
-			move_servo(push_pos, 120, 6);
 			delay(buffer_time);
-			num_of_pushes--;
+			release_cube();
+			delay(buffer_time);
 		}
-		else
+	else
+	{
+		while (num_of_pushes != 0)
 		{
-			move_servo(push_pos, 72, 6);
-			delay(buffer_time+100);
-			move_servo(push_pos, 120, 6);
-			delay(buffer_time+50);
-			num_of_pushes--;
-		}	
-	}
+			if (slow_push == false)
+			{
+				move_servo(push_pos, 72, 6);
+				delay(buffer_time+50);
+				move_servo(push_pos, 120, 6);
+				delay(buffer_time);
+				num_of_pushes--;
+			}
+			else
+			{
+				move_servo(push_pos, 72, 6);
+				delay(buffer_time+100);
+				move_servo(push_pos, 120, 6);
+				delay(buffer_time+50);
+				num_of_pushes--;
+			}	
+		}
 	release_cube();
+	}
 }
 void hold_cube()
 {
@@ -278,9 +281,10 @@ void rotate_one()
 	int rotate_finish = 11;
 	if (hold_progress == 1) // hold progress 1 = hold
 	{
+		// initail turn
 		move_servo(rotate_pos, rotate_finish-11, 9);
 		move_servo(rotate_pos, rotate_finish, 9);
-		// fix: cube not fully turned
+		// release and turn some more
 		release_cube();
 		move_servo(rotate_pos, 100, 9);
 		hold_cube();
@@ -310,13 +314,13 @@ void rotate_two()
 		if (rotate_pos < 50) 
 		{
 			move_servo(rotate_pos, rotate_finish+23, 9);
-			move_servo(rotate_pos, rotate_finish+5, 9);
+			move_servo(rotate_pos, rotate_finish, 9);
 		}
 		// rotate from rotate_three
 		else if (rotate_pos > 150) 
 		{
 			move_servo(rotate_pos, rotate_finish-15, 9);
-			move_servo(rotate_pos, rotate_finish, 9);
+			move_servo(rotate_pos, rotate_finish+5, 9);
 		}
 		hold_progress = 2;
 	}
@@ -2622,9 +2626,9 @@ void rotation_test()
 {
 	Serial.println("Rotation Test:");
 
-	rotate_one_to_two();
-	rotate_two_to_one();
-	rotate_two_to_three();
+	//rotate_one_to_two();
+	//rotate_two_to_one();
+	//rotate_two_to_three();
 	rotate_three_to_two();
 }
 
