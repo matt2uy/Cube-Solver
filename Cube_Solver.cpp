@@ -313,14 +313,14 @@ void rotate_two()
 		// rotate from rotate_one
 		if (rotate_pos < 50) 
 		{
-			move_servo(rotate_pos, rotate_finish+23, 9);
-			move_servo(rotate_pos, rotate_finish, 9);
+			move_servo(rotate_pos, rotate_finish+18, 9);
+			move_servo(rotate_pos, rotate_finish-5, 9);
 		}
 		// rotate from rotate_three
 		else if (rotate_pos > 150) 
 		{
-			move_servo(rotate_pos, rotate_finish-15, 9);
-			move_servo(rotate_pos, rotate_finish+5, 9);
+			move_servo(rotate_pos, rotate_finish-12, 9);
+			move_servo(rotate_pos, rotate_finish+2, 9);
 		}
 		hold_progress = 2;
 	}
@@ -341,14 +341,14 @@ void rotate_three()
 	if (hold_progress == 1) // hold progress 1 = hold
 	{
 		move_servo(rotate_pos, rotate_finish+5, 9);
-		move_servo(rotate_pos, rotate_finish-20, 9); // prevent pulling
+		move_servo(rotate_pos, rotate_finish-15, 9); // prevent pulling
 
 		// fix: cube not fully turned
 		release_cube();
 		move_servo(rotate_pos, 80, 9);
 		hold_cube();
-		move_servo(rotate_pos, 101, 9);
-		move_servo(rotate_pos, 90, 9); // prevent pulling
+		move_servo(rotate_pos, 100, 9);
+		move_servo(rotate_pos, 92, 9); // prevent pulling
 		release_cube();
 		move_servo(rotate_pos, rotate_finish, 9);
 		hold_progress = 2;
@@ -2580,9 +2580,9 @@ void rotation_test()
 {
 	Serial.println("Rotation Test:");
 
-	//rotate_one_to_two();
-	//rotate_two_to_one();
-	//rotate_two_to_three();
+	rotate_one_to_two();
+	rotate_two_to_one();
+	rotate_two_to_three();
 	rotate_three_to_two();
 }
 
@@ -3867,9 +3867,8 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
-	//import_cube_colors();
-	//solve_cube();
-	fix_cross_instance_2();
+	import_cube_colors();
+	solve_cube();
 	Serial.println("Done!");
 	while(true){}
 

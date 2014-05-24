@@ -13,8 +13,9 @@ Run here: $ cd Dropbox/'Cube Solver'/Project
 from Tkinter import *
 import serial
 import time
+import sys
 #ser = serial.Serial('/dev/ttyACM0', 9600)
-ser = serial.Serial('/dev/ttyACM7', 9600) 
+ser = serial.Serial('/dev/ttyACM13', 9600) 
 
 yellow_face = ['y', 'y', 'y',
                'y', 'y', 'y',
@@ -555,6 +556,14 @@ def print_cube():
     print "Orange Face: "
     print_face(orange_face)
 
+def legal_cube_check():
+    if yellow_face[4] != 'y' or white_face[4] != 'w' or blue_face[4] != 'b' or red_face[4] != 'r' or green_face[4] != 'g' or orange_face[4] != 'o': 
+        print "Incorrect center pieces, Try Again"
+        sys.exit()
+
+
+    # elif [check if there are 9 of each color]
+
 def enter_cube():
     enter_yellow_face()
     enter_white_face()
@@ -563,13 +572,15 @@ def enter_cube():
     enter_green_face()
     enter_orange_face()
 
-############## Script start ###################
+############# Script start ###################
 
 
 # do gui stuff
 
 enter_cube()
+legal_cube_check()
 print_cube()
+
 
 ###### put in function send_cube_state(): #########
 
