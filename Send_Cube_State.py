@@ -15,7 +15,7 @@ import serial
 import time
 import sys
 #ser = serial.Serial('/dev/ttyACM0', 9600)
-ser = serial.Serial('/dev/ttyACM13', 9600) 
+ser = serial.Serial('/dev/ttyACM1', 9600) 
 
 yellow_face = ['y', 'y', 'y',
                'y', 'y', 'y',
@@ -94,6 +94,27 @@ def send_raw_cube():
 	print "color sent: ", raw_cube_string
 
 	time.sleep(0.01)
+
+def initialize_connection():
+    reset_arduino() # get arduino ready
+    # wait until arduino sends out request for the cube string
+    while ser.readline() == "":
+        #nothing
+        print "Waiting for Arduino..."
+
+    # send cube string
+    raw_cube_string = generate_raw_cube()
+    ready_signal = ser.readline()   # original signal message
+
+    # wait until arduino is ready
+    ardu_ready = False  
+        
+    while ardu_ready == False:
+        arduino_status = ser.readline()
+        time.sleep(0.01)
+        if arduino_status == ready_signal:  # if arduino is ready
+            ardu_ready = True
+            time.sleep(0.01)
 
 ###### Gui functions ########
 def enter_yellow_face():
@@ -574,6 +595,9 @@ def enter_cube():
 
 ############# Script start ###################
 
+
+# need to do once (?)
+initialize_connection()
 
 # do gui stuff
 
