@@ -27,6 +27,7 @@ int rotate_pos = 90;
 int push_pos = 140;
 int hold_progress = 3;
 int offset_degrees = 10;
+bool slow_push = false;
 
 //////// cube move variables:
 bool sim_only = false;
@@ -233,14 +234,24 @@ int move_servo(int start, int finish, int servo_pin)
 	delay(buffer_time);
 }
 ///////// Cube movement functions: ////////////
-void push_cube(int num_of_pushes = 1, bool slow_push = false)
+void push_cube(int num_of_pushes = 1)
 {
 	if (num_of_pushes == 1)
 		{
-			move_servo(push_pos, 72, 6);
-			delay(buffer_time);
-			release_cube();
-			delay(buffer_time);
+			if (slow_push == false)
+			{
+				move_servo(push_pos, 72, 6);
+				delay(buffer_time);
+				release_cube();
+				delay(buffer_time);
+			}
+			else // on rotate one
+			{
+				move_servo(push_pos, 72, 6);
+				delay(buffer_time+200);
+				release_cube();
+				delay(buffer_time);
+			}
 		}
 	else
 	{
@@ -254,12 +265,12 @@ void push_cube(int num_of_pushes = 1, bool slow_push = false)
 				delay(buffer_time);
 				num_of_pushes--;
 			}
-			else
+			else // on rotate one
 			{
 				move_servo(push_pos, 72, 6);
-				delay(buffer_time+50);
+				delay(buffer_time+200);
 				move_servo(push_pos, 120, 6);
-				delay(buffer_time+150);
+				delay(buffer_time);
 				num_of_pushes--;
 			}	
 		}
@@ -278,6 +289,7 @@ void release_cube()
 }
 void rotate_one()
 {
+	slow_push = true;
 	int rotate_finish = 11;
 	if (hold_progress == 1) // hold progress 1 = hold
 	{
@@ -331,6 +343,7 @@ void rotate_one()
 }
 void rotate_two()
 {
+	slow_push = false;
 	int rotate_finish = 90;
 	if (hold_progress == 1) // hold progress 1 = hold
 	{
@@ -383,6 +396,7 @@ void rotate_two()
 }
 void rotate_three()
 {
+	slow_push = false;
 	int rotate_finish = 180;
 	if (hold_progress == 1) // hold progress 1 = hold
 	{
@@ -2325,7 +2339,7 @@ void green_on_right()
 	rotate_one();
 	release_cube();
 	//right_inverted();r
-	push_cube(3, true);
+	push_cube(3);
 	hold_cube();
 	rotate_two();
 	release_cube();
@@ -2342,7 +2356,7 @@ void green_on_right()
 	rotate_one();
 	release_cube();
 	//up_inverted();g
-	push_cube(3, true);
+	push_cube(3);
 	hold_cube();
 	rotate_two();
 	release_cube();
@@ -2357,14 +2371,14 @@ void green_on_right()
 	rotate_one();
 	release_cube();
 	//right(); + right();r
-	push_cube(3, true);
+	push_cube(3);
 	rotate_three();
 	hold_cube();
 	rotate_one();
 	release_cube();
 
 	// return to original orientation
-	push_cube(3, true);
+	push_cube(3);
 	rotate_two();
 	
 
@@ -2445,7 +2459,7 @@ void green_on_left()
 	release_cube();
 
 	// return to original orientation
-	push_cube(3, true);
+	push_cube(3);
 	rotate_two();
 	
 
@@ -2667,19 +2681,19 @@ void rotation_test()
 {
 	Serial.println("Rotation Test:");
 
-	//rotate_one_to_two();
-	//rotate_two_to_one();
-	//rotate_two_to_three();
+	rotate_one_to_two();
+	rotate_two_to_one();
+	rotate_two_to_three();
 	rotate_three_to_two();
-	//rotate_three_to_one();
-	//rotate_one_to_three();
+	rotate_three_to_one();
+	rotate_one_to_three();
 
-	/*rotate_one();
+	rotate_one();
 	push_cube();
 	rotate_two();
 	push_cube();
 	rotate_three();
-	push_cube();*/
+	push_cube();
 	
 }
 
@@ -3971,6 +3985,8 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
+	rotation_test();
+	push_cube();
 	import_cube_colors();
 	solve_cube();
 	Serial.println("Done!");
