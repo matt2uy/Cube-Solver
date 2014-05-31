@@ -15,7 +15,7 @@ import serial
 import time
 import sys
 #ser = serial.Serial('/dev/ttyACM0', 9600)
-ser = serial.Serial('/dev/ttyACM1', 9600) 
+ser = serial.Serial('/dev/ttyACM18', 9600) 
 
 yellow_face = ['y', 'y', 'y',
                'y', 'y', 'y',

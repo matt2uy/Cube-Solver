@@ -257,9 +257,9 @@ void push_cube(int num_of_pushes = 1, bool slow_push = false)
 			else
 			{
 				move_servo(push_pos, 72, 6);
-				delay(buffer_time+100);
-				move_servo(push_pos, 120, 6);
 				delay(buffer_time+50);
+				move_servo(push_pos, 120, 6);
+				delay(buffer_time+150);
 				num_of_pushes--;
 			}	
 		}
@@ -268,7 +268,7 @@ void push_cube(int num_of_pushes = 1, bool slow_push = false)
 }
 void hold_cube()
 {
-	move_servo(push_pos, 115, 6);
+	move_servo(push_pos, 117, 6);
 	hold_progress = 1;
 }
 void release_cube()
@@ -281,17 +281,41 @@ void rotate_one()
 	int rotate_finish = 11;
 	if (hold_progress == 1) // hold progress 1 = hold
 	{
-		// initial turn
-		move_servo(rotate_pos, rotate_finish-11, 9);
-		move_servo(rotate_pos, rotate_finish+10, 9);
-		// release and turn some more
-		release_cube();
-		move_servo(rotate_pos, 100, 9);
-		hold_cube();
-		move_servo(rotate_pos, 83, 9);
-		move_servo(rotate_pos, 93, 9); // prevent pulling
-		release_cube();
-		move_servo(rotate_pos, rotate_finish, 9);
+		// from rotate_two
+		if (rotate_pos < 140)
+		{
+			// initial turn
+			move_servo(rotate_pos, rotate_finish-11, 9);
+			move_servo(rotate_pos, rotate_finish+10, 9);
+			// release and turn some more
+			release_cube();
+			move_servo(rotate_pos, 101, 9);
+			hold_cube();
+			move_servo(rotate_pos, 82, 9);
+			move_servo(rotate_pos, 92, 9); // prevent pulling
+			release_cube();
+			move_servo(rotate_pos, rotate_finish, 9);
+		}
+
+		// from rotate_three
+		else if (rotate_pos > 140)
+		{
+			// initial turn
+			move_servo(rotate_pos, rotate_finish-11, 9);
+			move_servo(rotate_pos, rotate_finish+15, 9);
+			// release and turn some more
+			release_cube();
+			move_servo(rotate_pos, 108, 9);
+			hold_cube();
+			move_servo(rotate_pos, 83, 9);
+			move_servo(rotate_pos, 93, 9); // prevent pulling
+			release_cube();
+			move_servo(rotate_pos, rotate_finish, 9);
+		}
+
+
+
+
 		hold_progress = 2;
 	}
 	else if (hold_progress == 2) // hold progress 2 = release, but offset still there
@@ -313,14 +337,36 @@ void rotate_two()
 		// rotate from rotate_one
 		if (rotate_pos < 50) 
 		{
-			move_servo(rotate_pos, rotate_finish+18, 9);
+			// initial turn
+			move_servo(rotate_pos, rotate_finish+10, 9);
 			move_servo(rotate_pos, rotate_finish-5, 9);
+
+			// release and turn some more
+			
+			release_cube();
+			move_servo(rotate_pos, 0, 9);
+			hold_cube();
+			move_servo(rotate_pos, 18, 9);
+			move_servo(rotate_pos, 8, 9); // prevent pulling
+			release_cube();
+			
+			move_servo(rotate_pos, rotate_finish, 9);
 		}
 		// rotate from rotate_three
 		else if (rotate_pos > 150) 
 		{
 			move_servo(rotate_pos, rotate_finish-12, 9);
-			move_servo(rotate_pos, rotate_finish+2, 9);
+			move_servo(rotate_pos, rotate_finish+4, 9);
+
+
+			// release and turn some more
+			release_cube();
+			move_servo(rotate_pos, 180, 9);
+			hold_cube();
+			move_servo(rotate_pos, 170, 9);
+			move_servo(rotate_pos, 178, 9); // prevent pulling
+			release_cube();
+			move_servo(rotate_pos, rotate_finish, 9);
 		}
 		hold_progress = 2;
 	}
@@ -340,17 +386,38 @@ void rotate_three()
 	int rotate_finish = 180;
 	if (hold_progress == 1) // hold progress 1 = hold
 	{
-		move_servo(rotate_pos, rotate_finish+5, 9);
-		move_servo(rotate_pos, rotate_finish-15, 9); // prevent pulling
+		// from rotate_two
+		if (rotate_pos > 40)
+		{
+			move_servo(rotate_pos, rotate_finish+5, 9);
+			move_servo(rotate_pos, rotate_finish-10, 9); // prevent pulling
 
-		// fix: cube not fully turned
-		release_cube();
-		move_servo(rotate_pos, 80, 9);
-		hold_cube();
-		move_servo(rotate_pos, 100, 9);
-		move_servo(rotate_pos, 92, 9); // prevent pulling
-		release_cube();
-		move_servo(rotate_pos, rotate_finish, 9);
+			// fix: cube not fully turned
+			release_cube();
+			move_servo(rotate_pos, 80, 9);
+			hold_cube();
+			move_servo(rotate_pos, 100, 9);
+			move_servo(rotate_pos, 90, 9); // prevent pulling
+			release_cube();
+			move_servo(rotate_pos, rotate_finish, 9);
+		}
+
+		// from rotate_one
+		if (rotate_pos < 40)
+		{
+			move_servo(rotate_pos, rotate_finish+5, 9);
+			move_servo(rotate_pos, rotate_finish-20, 9); // prevent pulling
+
+			// fix: cube not fully turned
+			release_cube();
+			move_servo(rotate_pos, 70, 9);
+			hold_cube();
+			move_servo(rotate_pos, 100, 9);
+			move_servo(rotate_pos, 90, 9); // prevent pulling
+			release_cube();
+			move_servo(rotate_pos, rotate_finish, 9);
+		}
+
 		hold_progress = 2;
 	}
 	else if (hold_progress == 2) // hold progress 2 = release, but offset still there
@@ -2576,14 +2643,44 @@ void rotate_three_to_two()
 	push_cube();
 }
 
+// double turns:
+void rotate_three_to_one()
+{
+	Serial.println("rotate_three to rotate_two");
+	rotate_three();
+	hold_cube();
+	rotate_one();
+	release_cube();
+	push_cube();
+}
+
+void rotate_one_to_three()
+{
+	Serial.println("rotate_one to rotate_two");
+	rotate_one();
+	hold_cube();
+	rotate_three();
+	release_cube();
+	push_cube();
+}
 void rotation_test()
 {
 	Serial.println("Rotation Test:");
 
-	rotate_one_to_two();
-	rotate_two_to_one();
-	rotate_two_to_three();
+	//rotate_one_to_two();
+	//rotate_two_to_one();
+	//rotate_two_to_three();
 	rotate_three_to_two();
+	//rotate_three_to_one();
+	//rotate_one_to_three();
+
+	/*rotate_one();
+	push_cube();
+	rotate_two();
+	push_cube();
+	rotate_three();
+	push_cube();*/
+	
 }
 
 //////////////////////////////// cube_decide functions, used to determine what algorithms and moves to execute ///////////////////////
@@ -3847,6 +3944,13 @@ void solve_cube()
 	}
 }
 
+void show_off_cube()
+{
+	rotate_one();
+	rotate_three();
+	push_cube(2);
+	rotate_one();
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////// PROGRAM START ///////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3870,6 +3974,7 @@ void loop()
 	import_cube_colors();
 	solve_cube();
 	Serial.println("Done!");
+	show_off_cube();
 	while(true){}
 
 };
