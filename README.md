@@ -1,6 +1,8 @@
-Github: https://github.com/matt2uy/Cube-Solver
+An Arduino-powered robot that solves a rubiks cube.
 
-An Arduino robot that solves a rubiks cube.
+How I made it: http://www.instructables.com/id/Rubiks-Cube-Solver/
+Video: https://www.youtube.com/watch?v=gy5B6neyWf8
+Code: https://github.com/matt2uy/Cube-Solver
 
 How to use:
 1. Flash Cube_Solver.cpp to Arduino
