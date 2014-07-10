@@ -3985,8 +3985,6 @@ void setup()
 /////////////// Loop //////////////////
 void loop()
 {
-	rotation_test();
-	push_cube();
 	import_cube_colors();
 	solve_cube();
 	Serial.println("Done!");
