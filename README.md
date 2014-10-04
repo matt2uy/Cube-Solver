@@ -17,6 +17,7 @@ Dependencies:
 - tkinter
 
 Can be seen on:
+
 http://hackaday.com/2014/06/28/rubiks-cube-solver-made-out-of-popsicle-sticks-and-an-arduino/
 
 http://www.adafruit.com/blog/2014/08/22/make-a-the-rubiks-cube-solver-with-raspberry-pi-and-popsicle-sticks-piday-raspberrypi-raspberry_pi/
