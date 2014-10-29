@@ -1,33 +1,42 @@
-An Arduino-powered robot that solves a rubiks cube.
+A robot that uses an Arduino and a couple of servos to solve a rubiks cube.
 
-Video: https://www.youtube.com/watch?v=gy5B6neyWf8
+<strong>Video:<strong> https://www.youtube.com/watch?v=gy5B6neyWf8
 
-How I made it: http://www.instructables.com/id/Rubiks-Cube-Solver/
+<strong>How to build and run:<strong>
+http://www.instructables.com/id/Rubiks-Cube-Solver/
 
-Code: https://github.com/matt2uy/Cube-Solver
+<strong>Source Code:<strong> https://github.com/matt2uy/Cube-Solver
 
-How to use:  
-- Flash Cube_Solver.cpp to Arduino  
-- Run Send_Cube_State.py
+<strong>Dependencies:</strong>
+<li>
+- <a href="http://pyserial.sourceforge.net/">Pyserial</a>
+- <a href="http://arduino.cc/en/main/software">Arduino IDE</a> or <a href="https://codebender.cc/">Codebender</a> (To edit and upload the code onto the Arduino)
+- <a href="https://www.python.org/downloads/">Python 2.7.x</a>
+- Tkinter - GUI (Normally pre-installed with Python)
+</li>
 
-Dependencies:
-- pyserial
-- arduino ide...etc...
-- python 2.7 or later
-- tkinter
+<strong>Featured on:</strong>
+<li><a href="http://hackaday.com/2014/06/28/rubiks-cube-solver-made-out-of-popsicle-sticks-and-an-arduino/">Hackaday</a></li>
 
-Can be seen on:
+<li><a href="http://www.adafruit.com/blog/2014/08/22/make-a-the-rubiks-cube-solver-with-raspberry-pi-and-popsicle-sticks-piday-raspberrypi-raspberry_pi/">Adafruit</a></li>
 
-http://hackaday.com/2014/06/28/rubiks-cube-solver-made-out-of-popsicle-sticks-and-an-arduino/
+<li><a href="http://makerflux.com/make-rubiks-cube-solver-with-lolly-sticks-and-arduino/">Makerflux</a></li>
 
-http://www.adafruit.com/blog/2014/08/22/make-a-the-rubiks-cube-solver-with-raspberry-pi-and-popsicle-sticks-piday-raspberrypi-raspberry_pi/
+<li><a href="http://www.freetronics.com/blogs/news/14676777-build-an-arduino-powered-rubiks-cube-solving-machine#.VC8lQB_Hm00">Freetronics</a></li>
 
-http://makerflux.com/make-rubiks-cube-solver-with-lolly-sticks-and-arduino/
+<li><a href="http://atmelcorporation.wordpress.com/2014/06/25/solving-rubiks-cube-with-an-arduino-uno%E2%80%A8%E2%80%A8/">Atmel corporation</a></li>
 
-http://www.freetronics.com/blogs/news/14676777-build-an-arduino-powered-rubiks-cube-solving-machine#.VC8lQB_Hm00
+<li><a href="http://freshgadgets.nl/arduino-robot-gemaakt-van-ijsstokjes-lost-rubiks-kubus-op">Freshgadgets</a></li>
 
-http://freshgadgets.nl/arduino-robot-gemaakt-van-ijsstokjes-lost-rubiks-kubus-op
+<li><a href="http://www.planetarduino.org/?cat=3610">Planet Arduino</a></li>
 
-http://atmelcorporation.wordpress.com/2014/06/25/solving-rubiks-cube-with-an-arduino-uno%E2%80%A8%E2%80%A8/
 
-http://www.planetarduino.org/?cat=3610
+
+
+
+
+
+
+
+
+
