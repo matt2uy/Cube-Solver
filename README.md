@@ -1,4 +1,7 @@
+<h1>Rubik's Cube Solver</h1>
 A robot that uses an Arduino and a couple of servos to solve a rubiks cube.
+
+![alt tag](http://cdn.instructables.com/FQW/7W5H/HWOY1U0P/FQW7W5HHWOY1U0P.LARGE.jpg)
 
 <strong>Video:<strong> https://www.youtube.com/watch?v=gy5B6neyWf8
 
