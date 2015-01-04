@@ -1,21 +1,16 @@
-// main file = initializes movement variables and integrates all of them together
-// cube_data.h = gets cube data from user and sends it to solver
-// solver.h = gets cube data from cube_data.h and tells movement.h what algorithm to use
-// movement.h = gets algorithm from solver.h and moves the servos
-//-------------------------------------------------------------------------
-// fixes: maybe make proxy or pointer/reference variables in order to move all movement functions to a header file
-//Cube Solver: solves rubiks cube with 2 servos
-// pictures: <URL>
-// files and instructables: <URL>
+// Matthew Uy
+//----------------------------------------------------
+// Cube Solver: An Arduino Rubik's cube solving robot
+// Video: https://www.youtube.com/watch?v=gy5B6neyWf8
+// Instructable: http://www.instructables.com/id/Rubiks-Cube-Solver/
 
-// there are 4 layers of movement function:
+// There are 4 layers of movement functions:
 // 1. servo movement - how many degrees to move each servo
 // 2. servo actions - ex. pushing the cube, or rotating it
 // 3. cube moves - also known as cube notation; combinations of servo actions to orient the cube, then turn it, then orient it back
 // 4. cube algorithms - combinations of cube moves that perform a desired action to the cube
 
 #include <Servo.h>
-//#include <Solver.h>
 
 // servo objects
 Servo rotate_servo;
