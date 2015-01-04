@@ -1,20 +1,20 @@
 """
-corresponds with receive_parse.cpp
+corresponds with cube_solver.cpp
 
 Transfers the 6 cube face arrays 
 from the computer  (here)
 to their equivalent 
 in the arduino
 
-
-Run here: $ cd Dropbox/'Cube Solver'/Project
-		  $ python Send_Cube_State.py
 """
+
+
+
 from Tkinter import *
 import serial
 import time
 import sys
-#ser = serial.Serial('/dev/ttyACM0', 9600)
+
 ser = serial.Serial('/dev/ttyACM18', 9600) 
 
 yellow_face = ['y', 'y', 'y',
