@@ -7,7 +7,6 @@ A robot that uses an Arduino and a couple of servos to solve a rubiks cube.
 ##Video - https://www.youtube.com/watch?v=gy5B6neyWf8
 
 ##How to build your own:
-<li>
 - General Instructions - http://www.instructables.com/id/Rubiks-Cube-Solver/
 - Source Code - https://github.com/matt2uy/Cube-Solver
 - Dependencies:
@@ -15,7 +14,6 @@ A robot that uses an Arduino and a couple of servos to solve a rubiks cube.
   - <a href="http://arduino.cc/en/main/software">Arduino IDE</a> or <a href="https://codebender.cc/">Codebender</a> (To edit and upload the code onto the Arduino)
   - <a href="https://www.python.org/downloads/">Python 2.7.x</a>
   - Tkinter - GUI (Normally pre-installed with Python)
-</li>
 
 ##Featured on:
 - <a href="http://hackaday.com/2014/06/28/rubiks-cube-solver-made-out-of-popsicle-sticks-and-an-arduino/">Hackaday</a>
