@@ -18,7 +18,6 @@ A robot that uses an Arduino and a couple of servos to solve a rubiks cube.
 </li>
 
 ##Featured on:
-<li>
 - <a href="http://hackaday.com/2014/06/28/rubiks-cube-solver-made-out-of-popsicle-sticks-and-an-arduino/">Hackaday</a>
 - <a href="http://www.adafruit.com/blog/2014/08/22/make-a-the-rubiks-cube-solver-with-raspberry-pi-and-popsicle-sticks-piday-raspberrypi-raspberry_pi/">Adafruit</a>
 - <a href="http://makerflux.com/make-rubiks-cube-solver-with-lolly-sticks-and-arduino/">Makerflux</a>
@@ -26,4 +25,3 @@ A robot that uses an Arduino and a couple of servos to solve a rubiks cube.
 - <a href="http://atmelcorporation.wordpress.com/2014/06/25/solving-rubiks-cube-with-an-arduino-uno%E2%80%A8%E2%80%A8/">Atmel corporation</a>
 - <a href="http://freshgadgets.nl/arduino-robot-gemaakt-van-ijsstokjes-lost-rubiks-kubus-op">Freshgadgets</a>
 - <a href="http://www.planetarduino.org/?cat=3610">Planet Arduino</a>
-</li>
