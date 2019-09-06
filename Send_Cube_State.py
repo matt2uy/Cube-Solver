@@ -129,6 +129,7 @@ def enter_yellow_face():
         #global counter
         r=x/3
         c=x%3
+	print('counter[x]={}'.format(counter[x]))
         if b[r][c] == 0:
             b[r][c]= 5
             bb[x].ss.configure(bg='white', activebackground='white')
