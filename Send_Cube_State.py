@@ -594,7 +594,8 @@ def enter_cube():
     enter_orange_face()
 
 ############# Script start ###################
-
+if __name__ == '__main__':
+    # ALL following lines habe to be indented
 
 # need to do once (?)
 initialize_connection()
