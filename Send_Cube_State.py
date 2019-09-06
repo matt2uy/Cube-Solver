@@ -598,29 +598,29 @@ if __name__ == '__main__':
     # ALL following lines habe to be indented
 
 # need to do once (?)
-initialize_connection()
+    initialize_connection()
 
 # do gui stuff
 
-enter_cube()
-legal_cube_check()
-print_cube()
+    enter_cube()
+    legal_cube_check()
+    print_cube()
 
 
 ###### put in function send_cube_state(): #########
 
-reset_arduino() # get arduino ready
+    reset_arduino() # get arduino ready
 # wait until arduino sends out request for the cube string
-while ser.readline() == "":
+    while ser.readline() == "":
     #nothing
-    print "Waiting for Arduino..."
+        print "Waiting for Arduino..."
 
 # send cube string
-print "sending cube string..."
-raw_cube_string = generate_raw_cube()
-send_raw_cube()
-while True:
-    time.sleep(0.01)
+    print "sending cube string..."
+    raw_cube_string = generate_raw_cube()
+    send_raw_cube()
+    while True:
+        time.sleep(0.01)
     # show cube colours from arduino
-    print ser.readline()
+        print ser.readline()
 
