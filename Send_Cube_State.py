@@ -181,10 +181,10 @@ def enter_yellow_face():
             self.col = i%3
             def human_move(event):
                 change_color(self.nummer)
-            self.ss = Tk.Canvas(root, bg='yellow', width=100, height=100)
+            self.ss = Canvas(root, bg='yellow', width=100, height=100)
             self.ss.bind('<Button-1>', human_move) 
             
-            next_face = Canvas(root, text="Next Face",  command=root.destroy)
+            next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1)  
 
     bb = range(9)
@@ -253,10 +253,10 @@ def enter_white_face():
             self.col = i%3
             def human_move(event):
                 change_color(self.nummer)
-            self.ss = Tk.Canvas(root, bg='white', width=100, height=100)
+            self.ss = Canvas(root, bg='white', width=100, height=100)
             self.ss.bind('<Button-1>', human_move) 
             
-            next_face = Canvas(root, text="Next Face",  command=root.destroy)
+            next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1)
 
     bb = range(9)
@@ -327,10 +327,10 @@ def enter_blue_face():
             self.col = i%3
             def human_move(event):
                 change_color(self.nummer)
-            self.ss = Tk.Canvas(root, bg='blue', width=100, height=100)
+            self.ss = Canvas(root, bg='blue', width=100, height=100)
             self.ss.bind('<Button-1>', human_move) 
             
-            next_face = Canvas(root, text="Next Face",  command=root.destroy)
+            next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1) 
 
     bb = range(9)
@@ -401,10 +401,10 @@ def enter_red_face():
             self.col = i%3
             def human_move(event):
                 change_color(self.nummer)
-            self.ss = Tk.Canvas(root, bg='red', width=100, height=100)
+            self.ss = Canvas(root, bg='red', width=100, height=100)
             self.ss.bind('<Button-1>', human_move) 
             
-            next_face = Canvas(root, text="Next Face",  command=root.destroy)
+            next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1) 
 
     bb = range(9)
@@ -474,10 +474,10 @@ def enter_green_face():
             self.col = i%3
             def human_move(event):
                 change_color(self.nummer)
-            self.ss = Tk.Canvas(root, bg='green', width=100, height=100)
+            self.ss = Canvas(root, bg='green', width=100, height=100)
             self.ss.bind('<Button-1>', human_move) 
             
-            next_face = Canvas(root, text="Next Face",  command=root.destroy)
+            next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1)
 
     bb = range(9)
@@ -548,7 +548,7 @@ def enter_orange_face():
             self.col = i%3
             def human_move(event):
                 change_color(self.nummer)
-            self.ss = Tk.Canvas(root, bg='orange', width=100, height=100)
+            self.ss = Canvas(root, bg='orange', width=100, height=100)
             self.ss.bind('<Button-1>', human_move) 
             
             next_face = Button(root, text="Send Cube!",  command=root.destroy)
