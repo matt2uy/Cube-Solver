@@ -183,7 +183,8 @@ def enter_yellow_face():
                 change_color(self.nummer)
             self.ss = Canvas(root, bg='yellow', width=100, height=100)
             self.ss.bind('<Button-1>', human_move) 
-            
+            self.ss.grid(row=self.row, column=self.col)
+	
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1)  
 
@@ -255,7 +256,8 @@ def enter_white_face():
                 change_color(self.nummer)
             self.ss = Canvas(root, bg='white', width=100, height=100)
             self.ss.bind('<Button-1>', human_move) 
-            
+            self.ss.grid(row=self.row, column=self.col)
+	
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1)
 
@@ -329,7 +331,8 @@ def enter_blue_face():
                 change_color(self.nummer)
             self.ss = Canvas(root, bg='blue', width=100, height=100)
             self.ss.bind('<Button-1>', human_move) 
-            
+            self.ss.grid(row=self.row, column=self.col)
+	
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1) 
 
@@ -403,7 +406,8 @@ def enter_red_face():
                 change_color(self.nummer)
             self.ss = Canvas(root, bg='red', width=100, height=100)
             self.ss.bind('<Button-1>', human_move) 
-            
+            self.ss.grid(row=self.row, column=self.col)
+	
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1) 
 
@@ -476,7 +480,8 @@ def enter_green_face():
                 change_color(self.nummer)
             self.ss = Canvas(root, bg='green', width=100, height=100)
             self.ss.bind('<Button-1>', human_move) 
-            
+            self.ss.grid(row=self.row, column=self.col)
+	
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1)
 
@@ -550,7 +555,8 @@ def enter_orange_face():
                 change_color(self.nummer)
             self.ss = Canvas(root, bg='orange', width=100, height=100)
             self.ss.bind('<Button-1>', human_move) 
-            
+            self.ss.grid(row=self.row, column=self.col)
+	
             next_face = Button(root, text="Send Cube!",  command=root.destroy)
             next_face.grid(row=4, column=1) 
 
