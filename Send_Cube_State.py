@@ -129,40 +129,43 @@ def enter_yellow_face():
         #global counter
         r=x/3
         c=x%3
+	# print('counter[x]={}'.format(counter[x]))
+	# config = bb[x].ss.config()
+        # print('bb:{}'.format(config['background']))
         if b[r][c] == 0:
             b[r][c]= 5
-            bb[x].ss.configure(bg='white', activebackground='white')
+            bb[x].ss.configure(bg='white')
             counter[x] = 0
             yellow_face[x] = 'w'
 
         elif counter[x] == 0:
-            bb[x].ss.configure(bg='blue', activebackground='blue')
+            bb[x].ss.configure(bg='blue')
             counter[x] = 1
             yellow_face[x] = 'b'
 
         elif counter[x] == 1:
-            bb[x].ss.configure(bg='red', activebackground='red')
+            bb[x].ss.configure(bg='red')
             counter[x] = 2
             yellow_face[x] = 'r'
 
             ### keep following the cycle of white-yellow-red...
         elif counter[x] == 2:
-            bb[x].ss.configure(bg='green', activebackground='green')
+            bb[x].ss.configure(bg='green')
             counter[x] = 3
             yellow_face[x] = 'g'
 
         elif counter[x] == 3:
-            bb[x].ss.configure(bg='orange', activebackground='orange')
+            bb[x].ss.configure(bg='orange')
             counter[x] = 4
             yellow_face[x] = 'o'
 
         elif counter[x] == 4:
-            bb[x].ss.configure(bg='yellow', activebackground='yellow')
+            bb[x].ss.configure(bg='yellow')
             counter[x] = 5
             yellow_face[x] = 'y'
 
         elif counter[x] == 5:
-            bb[x].ss.configure(bg='white', activebackground='white')
+            bb[x].ss.configure(bg='white')
             counter[x] = 0
             yellow_face[x] = 'w'
 
@@ -176,11 +179,12 @@ def enter_yellow_face():
             self.nummer = i
             self.row = i/3
             self.col = i%3
-            def human_move():
+            def human_move(event):
                 change_color(self.nummer)
-            self.ss = Button(root, command=human_move, bg='yellow', activebackground='yellow', width=10, height=5)
-            self.ss.grid(row=self.row, column=self.col) 
-            
+            self.ss = Canvas(root, bg='yellow', width=100, height=100)
+            self.ss.bind('<Button-1>', human_move) 
+            self.ss.grid(row=self.row, column=self.col)
+	
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1)  
 
@@ -203,38 +207,38 @@ def enter_white_face():
         c=x%3
         if b[r][c] == 0:
             b[r][c]= 5
-            bb[x].ss.configure(bg='blue', activebackground='blue')
+            bb[x].ss.configure(bg='blue')
             counter[x] = 0
             white_face[x] = 'b'
 
         elif counter[x] == 0:
-            bb[x].ss.configure(bg='red', activebackground='red')
+            bb[x].ss.configure(bg='red')
             counter[x] = 1
             white_face[x] = 'r'
 
         elif counter[x] == 1:
-            bb[x].ss.configure(bg='green', activebackground='green')
+            bb[x].ss.configure(bg='green')
             counter[x] = 2
             white_face[x] = 'g'
 
             ### keep following the cycle of white-yellow-red...
         elif counter[x] == 2:
-            bb[x].ss.configure(bg='orange', activebackground='orange')
+            bb[x].ss.configure(bg='orange')
             counter[x] = 3
             white_face[x] = 'o'
 
         elif counter[x] == 3:
-            bb[x].ss.configure(bg='yellow', activebackground='yellow')
+            bb[x].ss.configure(bg='yellow')
             counter[x] = 4
             white_face[x] = 'y'
 
         elif counter[x] == 4:
-            bb[x].ss.configure(bg='white', activebackground='white')
+            bb[x].ss.configure(bg='white')
             counter[x] = 5
             white_face[x] = 'w'
 
         elif counter[x] == 5:
-            bb[x].ss.configure(bg='blue', activebackground='blue')
+            bb[x].ss.configure(bg='blue')
             counter[x] = 0
             white_face[x] = 'b'
 
@@ -248,11 +252,12 @@ def enter_white_face():
             self.nummer = i
             self.row = i/3
             self.col = i%3
-            def human_move():
+            def human_move(event):
                 change_color(self.nummer)
-            self.ss = Button(root, command=human_move, bg='white', activebackground='white', width=10, height=5)
-            self.ss.grid(row=self.row, column=self.col) 
-            
+            self.ss = Canvas(root, bg='white', width=100, height=100)
+            self.ss.bind('<Button-1>', human_move) 
+            self.ss.grid(row=self.row, column=self.col)
+	
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1)
 
@@ -276,40 +281,41 @@ def enter_blue_face():
         c=x%3
         if b[r][c] == 0:
             b[r][c]= 5
-            bb[x].ss.configure(bg='red', activebackground='red')
+            bb[x].ss.configure(bg='red')
             counter[x] = 0
             blue_face[x] = 'r'
 
         elif counter[x] == 0:
-            bb[x].ss.configure(bg='green', activebackground='green')
+            bb[x].ss.configure(bg='green')
             counter[x] = 1
             blue_face[x] = 'g'
 
         elif counter[x] == 1:
-            bb[x].ss.configure(bg='orange', activebackground='orange')
+            bb[x].ss.configure(bg='orange')
             counter[x] = 2
             blue_face[x] = 'o'
 
             ### keep following the cycle of white-yellow-red...
         elif counter[x] == 2:
-            bb[x].ss.configure(bg='yellow', activebackground='yellow')
+            bb[x].ss.configure(bg='yellow')
             counter[x] = 3
             blue_face[x] = 'y'
 
         elif counter[x] == 3:
-            bb[x].ss.configure(bg='white', activebackground='white')
+            bb[x].ss.configure(bg='white')
             counter[x] = 4
             blue_face[x] = 'w'
 
         elif counter[x] == 4:
-            bb[x].ss.configure(bg='blue', activebackground='blue')
+            bb[x].ss.configure(bg='blue')
             counter[x] = 5
             blue_face[x] = 'b'
 
         elif counter[x] == 5:
-            bb[x].ss.configure(bg='red', activebackground='red')
+            bb[x].ss.configure(bg='red')
             counter[x] = 0
             blue_face[x] = 'r'
+
 
     root = Tk()
     root.title('Enter Blue Face')
@@ -321,11 +327,12 @@ def enter_blue_face():
             self.nummer = i
             self.row = i/3
             self.col = i%3
-            def human_move():
+            def human_move(event):
                 change_color(self.nummer)
-            self.ss = Button(root, command=human_move, bg='blue', activebackground='blue', width=10, height=5)
-            self.ss.grid(row=self.row, column=self.col) 
-            
+            self.ss = Canvas(root, bg='blue', width=100, height=100)
+            self.ss.bind('<Button-1>', human_move) 
+            self.ss.grid(row=self.row, column=self.col)
+	
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1) 
 
@@ -349,40 +356,41 @@ def enter_red_face():
         c=x%3
         if b[r][c] == 0:
             b[r][c]= 5
-            bb[x].ss.configure(bg='green', activebackground='green')
+            bb[x].ss.configure(bg='green')
             counter[x] = 0
             red_face[x] = 'g'
 
         elif counter[x] == 0:
-            bb[x].ss.configure(bg='orange', activebackground='orange')
+            bb[x].ss.configure(bg='orange')
             counter[x] = 1
             red_face[x] = 'o'
 
         elif counter[x] == 1:
-            bb[x].ss.configure(bg='yellow', activebackground='yellow')
+            bb[x].ss.configure(bg='yellow')
             counter[x] = 2
             red_face[x] = 'y'
 
             ### keep following the cycle of white-yellow-red...
         elif counter[x] == 2:
-            bb[x].ss.configure(bg='white', activebackground='white')
+            bb[x].ss.configure(bg='white')
             counter[x] = 3
             red_face[x] = 'w'
 
         elif counter[x] == 3:
-            bb[x].ss.configure(bg='blue', activebackground='blue')
+            bb[x].ss.configure(bg='blue')
             counter[x] = 4
             red_face[x] = 'b'
 
         elif counter[x] == 4:
-            bb[x].ss.configure(bg='red', activebackground='red')
+            bb[x].ss.configure(bg='red')
             counter[x] = 5
             red_face[x] = 'r'
 
         elif counter[x] == 5:
-            bb[x].ss.configure(bg='green', activebackground='green')
+            bb[x].ss.configure(bg='green')
             counter[x] = 0
             red_face[x] = 'g'
+
 
     root = Tk()
     root.title('Enter Red Face')
@@ -394,11 +402,12 @@ def enter_red_face():
             self.nummer = i
             self.row = i/3
             self.col = i%3
-            def human_move():
+            def human_move(event):
                 change_color(self.nummer)
-            self.ss = Button(root, command=human_move, bg='red', activebackground='red', width=10, height=5)
-            self.ss.grid(row=self.row, column=self.col) 
-            
+            self.ss = Canvas(root, bg='red', width=100, height=100)
+            self.ss.bind('<Button-1>', human_move) 
+            self.ss.grid(row=self.row, column=self.col)
+	
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1) 
 
@@ -422,38 +431,38 @@ def enter_green_face():
         c=x%3
         if b[r][c] == 0:
             b[r][c]= 5
-            bb[x].ss.configure(bg='orange', activebackground='orange')
+            bb[x].ss.configure(bg='orange')
             counter[x] = 0
             green_face[x] = 'o'
 
         elif counter[x] == 0:
-            bb[x].ss.configure(bg='yellow', activebackground='yellow')
+            bb[x].ss.configure(bg='yellow')
             counter[x] = 1
             green_face[x] = 'y'
 
         elif counter[x] == 1:
-            bb[x].ss.configure(bg='white', activebackground='white')
+            bb[x].ss.configure(bg='white')
             counter[x] = 2
             green_face[x] = 'w'
 
             ### keep following the cycle of white-yellow-red...
         elif counter[x] == 2:
-            bb[x].ss.configure(bg='blue', activebackground='blue')
+            bb[x].ss.configure(bg='blue')
             counter[x] = 3
             green_face[x] = 'b'
 
         elif counter[x] == 3:
-            bb[x].ss.configure(bg='red', activebackground='red')
+            bb[x].ss.configure(bg='red')
             counter[x] = 4
             green_face[x] = 'r'
 
         elif counter[x] == 4:
-            bb[x].ss.configure(bg='green', activebackground='green')
+            bb[x].ss.configure(bg='green')
             counter[x] = 5
             green_face[x] = 'g'
 
         elif counter[x] == 5:
-            bb[x].ss.configure(bg='orange', activebackground='orange')
+            bb[x].ss.configure(bg='orange')
             counter[x] = 0
             green_face[x] = 'o'
 
@@ -467,11 +476,12 @@ def enter_green_face():
             self.nummer = i
             self.row = i/3
             self.col = i%3
-            def human_move():
+            def human_move(event):
                 change_color(self.nummer)
-            self.ss = Button(root, command=human_move, bg='green', activebackground='green', width=10, height=5)
-            self.ss.grid(row=self.row, column=self.col) 
-            
+            self.ss = Canvas(root, bg='green', width=100, height=100)
+            self.ss.bind('<Button-1>', human_move) 
+            self.ss.grid(row=self.row, column=self.col)
+	
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1)
 
@@ -495,40 +505,41 @@ def enter_orange_face():
         c=x%3
         if b[r][c] == 0:
             b[r][c]= 5
-            bb[x].ss.configure(bg='yellow', activebackground='yellow')
+            bb[x].ss.configure(bg='yellow')
             counter[x] = 0
             orange_face[x] = 'y'
 
         elif counter[x] == 0:
-            bb[x].ss.configure(bg='white', activebackground='white')
+            bb[x].ss.configure(bg='white')
             counter[x] = 1
             orange_face[x] = 'w'
 
         elif counter[x] == 1:
-            bb[x].ss.configure(bg='blue', activebackground='blue')
+            bb[x].ss.configure(bg='blue')
             counter[x] = 2
             orange_face[x] = 'b'
 
             ### keep following the cycle of white-yellow-red...
         elif counter[x] == 2:
-            bb[x].ss.configure(bg='red', activebackground='red')
+            bb[x].ss.configure(bg='red')
             counter[x] = 3
             orange_face[x] = 'r'
 
         elif counter[x] == 3:
-            bb[x].ss.configure(bg='green', activebackground='green')
+            bb[x].ss.configure(bg='green')
             counter[x] = 4
             orange_face[x] = 'g'
 
         elif counter[x] == 4:
-            bb[x].ss.configure(bg='orange', activebackground='orange')
+            bb[x].ss.configure(bg='orange')
             counter[x] = 5
             orange_face[x] = 'o'
 
         elif counter[x] == 5:
-            bb[x].ss.configure(bg='yellow', activebackground='yellow')
+            bb[x].ss.configure(bg='yellow')
             counter[x] = 0
             orange_face[x] = 'y'
+
 
     root = Tk()
     root.title('Enter Orange Face')
@@ -540,11 +551,12 @@ def enter_orange_face():
             self.nummer = i
             self.row = i/3
             self.col = i%3
-            def human_move():
+            def human_move(event):
                 change_color(self.nummer)
-            self.ss = Button(root, command=human_move, bg='orange', activebackground='orange', width=10, height=5)
-            self.ss.grid(row=self.row, column=self.col) 
-            
+            self.ss = Canvas(root, bg='orange', width=100, height=100)
+            self.ss.bind('<Button-1>', human_move) 
+            self.ss.grid(row=self.row, column=self.col)
+	
             next_face = Button(root, text="Send Cube!",  command=root.destroy)
             next_face.grid(row=4, column=1) 
 
@@ -594,32 +606,33 @@ def enter_cube():
     enter_orange_face()
 
 ############# Script start ###################
-
+if __name__ == '__main__':
+    # ALL following lines habe to be indented
 
 # need to do once (?)
-initialize_connection()
+    initialize_connection()
 
 # do gui stuff
 
-enter_cube()
-legal_cube_check()
-print_cube()
+    enter_cube()
+    legal_cube_check()
+    print_cube()
 
 
 ###### put in function send_cube_state(): #########
 
-reset_arduino() # get arduino ready
+    reset_arduino() # get arduino ready
 # wait until arduino sends out request for the cube string
-while ser.readline() == "":
+    while ser.readline() == "":
     #nothing
-    print "Waiting for Arduino..."
+        print "Waiting for Arduino..."
 
 # send cube string
-print "sending cube string..."
-raw_cube_string = generate_raw_cube()
-send_raw_cube()
-while True:
-    time.sleep(0.01)
+    print "sending cube string..."
+    raw_cube_string = generate_raw_cube()
+    send_raw_cube()
+    while True:
+        time.sleep(0.01)
     # show cube colours from arduino
-    print ser.readline()
+        print ser.readline()
 
