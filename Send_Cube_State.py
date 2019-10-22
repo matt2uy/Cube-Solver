@@ -1,21 +1,19 @@
 """
 corresponds with cube_solver.cpp
-
 Transfers the 6 cube face arrays 
 from the computer  (here)
 to their equivalent 
 in the arduino
-
 """
 
 
 
-from Tkinter import *
+from tkinter import *
 import serial
 import time
 import sys
 
-ser = serial.Serial('/dev/ttyACM18', 9600) 
+ser = serial.Serial('COM3', 9600)
 
 yellow_face = ['y', 'y', 'y',
                'y', 'y', 'y',
@@ -58,11 +56,11 @@ def generate_raw_cube():
 	for color in white_face:
 		raw_cube_string = raw_cube_string + color
 		#catenate 'raw_cube_string' with yellow_face[0], [1], on and on.....
-	
+
 	for color in red_face:
 		raw_cube_string = raw_cube_string + color
 		#catenate 'raw_cube_string' with yellow_face[0], [1], on and on.....
-	
+
 	for color in blue_face:
 		raw_cube_string = raw_cube_string + color
 		#catenate 'raw_cube_string' with yellow_face[0], [1], on and on.....
@@ -81,7 +79,7 @@ def send_raw_cube():
 
 	# wait until arduino is ready
 	ardu_ready = False	
-		
+
 	while ardu_ready == False:
 		arduino_status = ser.readline()
 		time.sleep(0.01)
@@ -90,9 +88,8 @@ def send_raw_cube():
 			time.sleep(0.01)
 
 	# send the raw_cube_string<
-	ser.write(raw_cube_string)
-	print "color sent: ", raw_cube_string
-
+	ser.write(raw_cube_string.encode())
+	print ("color sent: ", raw_cube_string)
 	time.sleep(0.01)
 
 def initialize_connection():
@@ -100,7 +97,7 @@ def initialize_connection():
     # wait until arduino sends out request for the cube string
     while ser.readline() == "":
         #nothing
-        print "Waiting for Arduino..."
+        print ("Waiting for Arduino...")
 
     # send cube string
     raw_cube_string = generate_raw_cube()
@@ -108,7 +105,7 @@ def initialize_connection():
 
     # wait until arduino is ready
     ardu_ready = False  
-        
+
     while ardu_ready == False:
         arduino_status = ser.readline()
         time.sleep(0.01)
@@ -129,8 +126,8 @@ def enter_yellow_face():
         #global counter
         r=x/3
         c=x%3
-        if b[r][c] == 0:
-            b[r][c]= 5
+        if b[int(r)][int(c)] == 0:
+            b[int(r)][int(c)]= 5
             bb[x].ss.configure(bg='white', activebackground='white')
             counter[x] = 0
             yellow_face[x] = 'w'
@@ -179,12 +176,12 @@ def enter_yellow_face():
             def human_move():
                 change_color(self.nummer)
             self.ss = Button(root, command=human_move, bg='yellow', activebackground='yellow', width=10, height=5)
-            self.ss.grid(row=self.row, column=self.col) 
-            
+            self.ss.grid(row=int(self.row), column=int(self.col)) 
+
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1)  
 
-    bb = range(9)
+    bb = list(range(9))
     for i in range(9):
         bb[i]= Knop(i, master=root)
 
@@ -201,8 +198,8 @@ def enter_white_face():
         # seems like x is the square number out of the 9 squares
         r=x/3
         c=x%3
-        if b[r][c] == 0:
-            b[r][c]= 5
+        if b[int(r)][int(c)]== 0:
+            b[int(r)][int(c)]= 5
             bb[x].ss.configure(bg='blue', activebackground='blue')
             counter[x] = 0
             white_face[x] = 'b'
@@ -251,12 +248,12 @@ def enter_white_face():
             def human_move():
                 change_color(self.nummer)
             self.ss = Button(root, command=human_move, bg='white', activebackground='white', width=10, height=5)
-            self.ss.grid(row=self.row, column=self.col) 
-            
+            self.ss.grid(row=int(self.row), column=int(self.col)) 
+
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1)
 
-    bb = range(9)
+    bb = list(range(9))
     for i in range(9):
         bb[i]= Knop(i, master=root)
 
@@ -274,8 +271,8 @@ def enter_blue_face():
         # seems like x is the square number out of the 9 squares
         r=x/3
         c=x%3
-        if b[r][c] == 0:
-            b[r][c]= 5
+        if b[int(r)][int(c)] == 0:
+            b[int(r)][int(c)]= 5
             bb[x].ss.configure(bg='red', activebackground='red')
             counter[x] = 0
             blue_face[x] = 'r'
@@ -324,12 +321,12 @@ def enter_blue_face():
             def human_move():
                 change_color(self.nummer)
             self.ss = Button(root, command=human_move, bg='blue', activebackground='blue', width=10, height=5)
-            self.ss.grid(row=self.row, column=self.col) 
-            
+            self.ss.grid(row=int(self.row), column=int(self.col)) 
+
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1) 
 
-    bb = range(9)
+    bb = list(range(9))
     for i in range(9):
         bb[i]= Knop(i, master=root)
 
@@ -347,8 +344,8 @@ def enter_red_face():
         # seems like x is the square number out of the 9 squares
         r=x/3
         c=x%3
-        if b[r][c] == 0:
-            b[r][c]= 5
+        if b[int(r)][int(c)] == 0:
+            b[int(r)][int(c)]= 5
             bb[x].ss.configure(bg='green', activebackground='green')
             counter[x] = 0
             red_face[x] = 'g'
@@ -397,12 +394,12 @@ def enter_red_face():
             def human_move():
                 change_color(self.nummer)
             self.ss = Button(root, command=human_move, bg='red', activebackground='red', width=10, height=5)
-            self.ss.grid(row=self.row, column=self.col) 
-            
+            self.ss.grid(row=int(self.row), column=int(self.col)) 
+
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1) 
 
-    bb = range(9)
+    bb = list(range(9))
     for i in range(9):
         bb[i]= Knop(i, master=root)
 
@@ -420,8 +417,8 @@ def enter_green_face():
         # seems like x is the square number out of the 9 squares
         r=x/3
         c=x%3
-        if b[r][c] == 0:
-            b[r][c]= 5
+        if b[int(r)][int(c)] == 0:
+            b[int(r)][int(c)]= 5
             bb[x].ss.configure(bg='orange', activebackground='orange')
             counter[x] = 0
             green_face[x] = 'o'
@@ -470,12 +467,12 @@ def enter_green_face():
             def human_move():
                 change_color(self.nummer)
             self.ss = Button(root, command=human_move, bg='green', activebackground='green', width=10, height=5)
-            self.ss.grid(row=self.row, column=self.col) 
-            
+            self.ss.grid(row=int(self.row), column=int(self.col)) 
+
             next_face = Button(root, text="Next Face",  command=root.destroy)
             next_face.grid(row=4, column=1)
 
-    bb = range(9)
+    bb = list(range(9))
     for i in range(9):
         bb[i]= Knop(i, master=root)
 
@@ -493,8 +490,8 @@ def enter_orange_face():
         # seems like x is the square number out of the 9 squares
         r=x/3
         c=x%3
-        if b[r][c] == 0:
-            b[r][c]= 5
+        if b[int(r)][int(c)] == 0:
+            b[int(r)][int(c)]= 5
             bb[x].ss.configure(bg='yellow', activebackground='yellow')
             counter[x] = 0
             orange_face[x] = 'y'
@@ -543,43 +540,43 @@ def enter_orange_face():
             def human_move():
                 change_color(self.nummer)
             self.ss = Button(root, command=human_move, bg='orange', activebackground='orange', width=10, height=5)
-            self.ss.grid(row=self.row, column=self.col) 
-            
+            self.ss.grid(row=int(self.row), column=int(self.col)) 
+
             next_face = Button(root, text="Send Cube!",  command=root.destroy)
             next_face.grid(row=4, column=1) 
 
-    bb = range(9)
+    bb = list(range(9))
     for i in range(9):
         bb[i]= Knop(i, master=root)
 
     mainloop()
 
 def print_face(current_face):
-    print current_face[0], current_face[1], current_face[2]
-    print current_face[3], current_face[4], current_face[5]
-    print current_face[6], current_face[7], current_face[8]
+    print (current_face[0], current_face[1], current_face[2])
+    print (current_face[3], current_face[4], current_face[5])
+    print (current_face[6], current_face[7], current_face[8])
 def print_cube():
-    print "Yellow Face: "
+    print ("Yellow Face: ")
     print_face(yellow_face)
 
-    print "White Face: "
+    print ("White Face: ")
     print_face(white_face)
 
-    print "Blue Face: "
+    print ("Blue Face: ")
     print_face(blue_face)
 
-    print "Red Face: "
+    print ("Red Face: ")
     print_face(red_face)
 
-    print "Green Face: "
+    print ("Green Face: ")
     print_face(green_face)
 
-    print "Orange Face: "
+    print ("Orange Face: ")
     print_face(orange_face)
 
 def legal_cube_check():
     if yellow_face[4] != 'y' or white_face[4] != 'w' or blue_face[4] != 'b' or red_face[4] != 'r' or green_face[4] != 'g' or orange_face[4] != 'o': 
-        print "Incorrect center pieces, Try Again"
+        print ("Incorrect center pieces, Try Again")
         sys.exit()
 
 
@@ -612,14 +609,13 @@ reset_arduino() # get arduino ready
 # wait until arduino sends out request for the cube string
 while ser.readline() == "":
     #nothing
-    print "Waiting for Arduino..."
+    print ("Waiting for Arduino...")
 
 # send cube string
-print "sending cube string..."
+print ("sending cube string...")
 raw_cube_string = generate_raw_cube()
 send_raw_cube()
 while True:
     time.sleep(0.01)
     # show cube colours from arduino
-    print ser.readline()
-
+    print (ser.readline())
